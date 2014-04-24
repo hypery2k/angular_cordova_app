@@ -1,0 +1,41 @@
+{
+  "name": "angular-cordova-app",
+  "version": "0.0.1",
+  "description": "RTC",
+  "main": "index.js",
+  "directories": {
+    "www": "www"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hypery2k/angular_cordova_app.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hypery2k/angular_cordova_app/issues"
+  },
+  "devDependencies": {
+    "css-parse": "~1.6.0",
+    "css-stringify": "~1.3.2",
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-connect": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-recess": "~0.4.0",
+    "kexec": "~0.1.1",
+    "parameterize": "0.0.7",
+    "grunt-github-pages": "0.0.4",
+    "semver": "~2.2.1"
+  },
+  "homepage": "https://github.com/hypery2k/angular_cordova_app"
+}
