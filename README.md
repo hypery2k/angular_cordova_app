@@ -1,4 +1,4 @@
-angular_cordova_app
-===================
+AngularJS Cordova App
+=====================
 
-Simple demo app combining AngularJS with Cordova-based Hybrid Apps
+Simple demo app combining AngularJS with Cordova-based Hybrid Apps.
