@@ -10,3 +10,5 @@ platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/xcuserdata/mreinha
 server/.project
 server/.settings/org.eclipse.jdt.core.prefs
 server/.classpath
+
+app/target/*

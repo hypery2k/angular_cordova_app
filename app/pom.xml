@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.mare.mobile</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>app</artifactId>
+	<name>angularJS Cordova App</name>
+	<description>MobileApp based on Cordova and AngularJS</description>
+	<packaging>jar</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<version>${jasmine-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<jsSrcDir>${basedir}/www/js</jsSrcDir>
+					<jsTestSrcDir>${basedir}/test/js</jsTestSrcDir>
+					<preloadSources>
+						<!-- libraries and frameworks here -->
+					</preloadSources>
+					<sourceIncludes>
+						<!-- AngularJS components here -->
+					</sourceIncludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>deploy-server</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${maven-antrun-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>server-copy</id>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo message="Push to www folder" />
+										<copy
+											todir="/var/www/martinreinhardt-online.de/github/angular_cordova_app/">
+											<fileset dir="${basedir}/www">
+												<include name="**/*.*" />
+											</fileset>
+										</copy>
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-jsch</artifactId>
+								<version>1.8.2</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>gr.abiss.mvn.plugins</groupId>
+				<artifactId>maven-jstools-plugin</artifactId>
+				<version>${maven-jstools-plugin.version}</version>
+				<configuration>
+					<sourceJsFolder>de.profi.kita.maven.parent/${project.artifactId}/www/js</sourceJsFolder>
+					<jsDir>de.profi.kita.maven.parent/${project.artifactId}/www/js</jsDir>
+					<includePrivate>true</includePrivate>
+					<includeUndocumented>true</includeUndocumented>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>jslint</report>
+							<report>jsdoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<dependencies>
+		<dependency>
+			<groupId>gr.abiss.mvn.plugins</groupId>
+			<artifactId>maven-jstools-plugin</artifactId>
+			<version>${maven-jstools-plugin.version}</version>
+			<exclusions>
+				<exclusion>
+					<!-- rhino is only needed for reporting, not WAR runtime -->
+					<groupId>rhino</groupId>
+					<artifactId>js</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+</project>
