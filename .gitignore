@@ -7,3 +7,6 @@
 # Pods/
 
 platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/xcuserdata/mreinhardt.xcuserdatad/*.xcuserstate
+server/.project
+server/.settings/org.eclipse.jdt.core.prefs
+server/.classpath
