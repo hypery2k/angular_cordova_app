@@ -2,8 +2,8 @@ angular_cordova_app
 ===================
 
 Simple demo app combining a AngularJS with Cordova-based Hybrid Apps with a JAX-RS backend:
-* [server](https://github.com/hypery2k/angular_cordova_app/tree/master/app) (NOT YET COMPLETE)
-* [app](https://github.com/hypery2k/angular_cordova_app/tree/master/server)
+* [server](https://github.com/hypery2k/angular_cordova_app/tree/master/server) (NOT YET COMPLETE)
+* [app](https://github.com/hypery2k/angular_cordova_app/tree/master/app)
 
 If you like, you're free to donate:
 
