@@ -12,3 +12,5 @@ server/.settings/org.eclipse.jdt.core.prefs
 server/.classpath
 
 app/target/*
+
+app/platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/xcuserdata/mreinhardt.xcuserdatad/UserInterfaceState.xcuserstate
