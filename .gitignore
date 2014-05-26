@@ -14,3 +14,5 @@ server/.classpath
 app/target/*
 
 app/platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/xcuserdata/mreinhardt.xcuserdatad/UserInterfaceState.xcuserstate
+
+app/platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/xcuserdata/mreinhardt.xcuserdatad/UserInterfaceState.xcuserstate
