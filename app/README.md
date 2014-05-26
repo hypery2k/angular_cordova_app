@@ -3,9 +3,11 @@ angular_cordova_app - app
 
 Simple demo app combining AngularJS with Cordova-based Hybrid Apps.
 
+Based on [mobile-angular-ui](https://github.com/mcasimir/mobile-angular-ui)
+
 ## Dev
 
-- install node.js
+- install [node.js](http://nodejs.org/download/)
 - (sudo) npm install -g grunt-cli
 - (sudo) npm install grunt (for grunt dependencies.)
 - (sudo) npm install
