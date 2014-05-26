@@ -12,7 +12,8 @@ server/.settings/org.eclipse.jdt.core.prefs
 server/.classpath
 
 app/target/*
+app/platforms/ios/angularCordovaApp.xcodeproj/xcuserdata/*
+app/platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/*
+app/platforms/ios/www/*
 
-app/platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/xcuserdata/mreinhardt.xcuserdatad/UserInterfaceState.xcuserstate
-
-app/platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/xcuserdata/mreinhardt.xcuserdatad/UserInterfaceState.xcuserstate
+.idea/workspace.xml
