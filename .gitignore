@@ -17,3 +17,4 @@ app/platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/*
 app/platforms/ios/www/*
 
 .idea/workspace.xml
+app/node_modules/*
