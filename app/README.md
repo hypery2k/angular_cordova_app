@@ -9,11 +9,14 @@ Based on [mobile-angular-ui](https://github.com/mcasimir/mobile-angular-ui)
 
 - install [node.js](http://nodejs.org/download/)
 - (sudo) npm install -g grunt-cli
+- (sudo) npm install -g cordova-gen-icon
 - (sudo) npm install grunt (for grunt dependencies.)
 - (sudo) npm install
 - grunt connect
 
 sudo may be required depending on your setup
+
+https://bitbucket.org/ntakimura/cordova-gen-icon
 
 Run the app in your browser:
 
