@@ -4,28 +4,84 @@
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
   <classpathentry kind="var" path="M2_REPO/gr/abiss/mvn/plugins/maven-jstools-plugin/0.6/maven-jstools-plugin-0.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.8/log4j-1.2.8.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/plugins/maven-jar-plugin/2.1/maven-jar-plugin-2.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-project/2.0/maven-project-2.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-profile/2.0/maven-profile-2.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-model/2.0/maven-model-2.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-utils/1.0.4/plexus-utils-1.0.4.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-container-default/1.0-alpha-8/plexus-container-default-1.0-alpha-8.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/plugins/maven-jar-plugin/2.1/maven-jar-plugin-2.1.jar" sourcepath="M2_REPO/org/apache/maven/plugins/maven-jar-plugin/2.1/maven-jar-plugin-2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/plugins/maven-jar-plugin/2.1/maven-jar-plugin-2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-project/2.0/maven-project-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-project/2.0/maven-project-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/maven-project/2.0/maven-project-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-profile/2.0/maven-profile-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-profile/2.0/maven-profile-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/maven-profile/2.0/maven-profile-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-model/2.0/maven-model-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-model/2.0/maven-model-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/maven-model/2.0/maven-model-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-utils/1.0.4/plexus-utils-1.0.4.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-utils/1.0.4/plexus-utils-1.0.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-container-default/1.0-alpha-8/plexus-container-default-1.0-alpha-8.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-container-default/1.0-alpha-8/plexus-container-default-1.0-alpha-8-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact-manager/2.0/maven-artifact-manager-2.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-repository-metadata/2.0/maven-repository-metadata-2.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact/2.0/maven-artifact-2.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-5/wagon-provider-api-1.0-alpha-5.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-archiver/2.2/maven-archiver-2.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-archiver/1.0-alpha-9/plexus-archiver-1.0-alpha-9.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.1/commons-lang-2.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/reporting/maven-reporting-api/2.0/maven-reporting-api-2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact-manager/2.0/maven-artifact-manager-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-artifact-manager/2.0/maven-artifact-manager-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/maven-artifact-manager/2.0/maven-artifact-manager-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-repository-metadata/2.0/maven-repository-metadata-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-repository-metadata/2.0/maven-repository-metadata-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/maven-repository-metadata/2.0/maven-repository-metadata-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-artifact/2.0/maven-artifact-2.0.jar" sourcepath="M2_REPO/org/apache/maven/maven-artifact/2.0/maven-artifact-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/maven-artifact/2.0/maven-artifact-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-5/wagon-provider-api-1.0-alpha-5.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-5/wagon-provider-api-1.0-alpha-5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-archiver/2.2/maven-archiver-2.2.jar" sourcepath="M2_REPO/org/apache/maven/maven-archiver/2.2/maven-archiver-2.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/maven-archiver/2.2/maven-archiver-2.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-archiver/1.0-alpha-9/plexus-archiver-1.0-alpha-9.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-archiver/1.0-alpha-9/plexus-archiver-1.0-alpha-9-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.1/commons-lang-2.1.jar" sourcepath="M2_REPO/commons-lang/commons-lang/2.1/commons-lang-2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/commons-lang/commons-lang/2.1/commons-lang-2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/reporting/maven-reporting-api/2.0/maven-reporting-api-2.0.jar" sourcepath="M2_REPO/org/apache/maven/reporting/maven-reporting-api/2.0/maven-reporting-api-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0/maven-reporting-api-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/doxia/doxia-sink-api/1.0-alpha-4/doxia-sink-api-1.0-alpha-4.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/maven/reporting/maven-reporting-impl/2.0/maven-reporting-impl-2.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-validator/commons-validator/1.1.4/commons-validator-1.1.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/reporting/maven-reporting-impl/2.0/maven-reporting-impl-2.0.jar" sourcepath="M2_REPO/org/apache/maven/reporting/maven-reporting-impl/2.0/maven-reporting-impl-2.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/apache/maven/reporting/maven-reporting-impl/2.0/maven-reporting-impl-2.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/commons-validator/commons-validator/1.1.4/commons-validator-1.1.4.jar" sourcepath="M2_REPO/commons-validator/commons-validator/1.1.4/commons-validator-1.1.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/commons-validator/commons-validator/1.1.4/commons-validator-1.1.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/oro/oro/2.0.7/oro-2.0.7.jar"/>
   <classpathentry kind="var" path="M2_REPO/doxia/doxia-core/1.0-alpha-4/doxia-core-1.0-alpha-4.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-io/1.0-alpha-1/plexus-io-1.0-alpha-1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/1.3/commons-io-1.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-io/1.0-alpha-1/plexus-io-1.0-alpha-1.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-io/1.0-alpha-1/plexus-io-1.0-alpha-1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/mreinhardt/.m2/repository/org/codehaus/plexus/plexus-io/1.0-alpha-1/plexus-io-1.0-alpha-1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/1.3/commons-io-1.3.jar" sourcepath="M2_REPO/commons-io/commons-io/1.3/commons-io-1.3-sources.jar"/>
 </classpath>

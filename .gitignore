@@ -18,3 +18,8 @@ app/platforms/ios/www/*
 
 .idea/workspace.xml
 app/node_modules/*
+app/bower_components/*
+app/node/*
+app/.classpath
+app/www/bower_components/*
+node_modules/.bin/grunt*
