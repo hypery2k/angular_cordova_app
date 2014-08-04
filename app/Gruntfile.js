@@ -3,8 +3,18 @@
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
+  grunt.loadNpmTasks('grunt-bower-task');
 
   grunt.initConfig({
+	bower: {
+	    install: {
+	       //just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
+
+	        options: {
+	        	copy: false,
+	        }
+	    }
+	  },
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'src/main/webapp',

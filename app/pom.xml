@@ -43,6 +43,16 @@
 					</execution>
 
 					<execution>
+						<id>bower</id>
+						<goals>
+							<goal>grunt</goal>
+						</goals>
+						<configuration>
+							<arguments>bower:install</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
 						<id>grunt build</id>
 						<goals>
 							<goal>grunt</goal>
