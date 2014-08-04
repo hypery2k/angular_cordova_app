@@ -17,3 +17,5 @@ Or via PayPal:
 
 
 [![Build Status](https://martinreinhardt-online.de/jenkins/job/AngularCordovaApp/badge/icon)](https://martinreinhardt-online.de/jenkins/job/AngularCordovaApp/)
+
+mvn -Pdeploy-local-jboss install

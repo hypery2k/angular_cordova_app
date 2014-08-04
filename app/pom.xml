@@ -67,11 +67,69 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.github.eirslett
+										</groupId>
+										<artifactId>
+											frontend-maven-plugin
+										</artifactId>
+										<versionRange>
+											[0.0.15,)
+										</versionRange>
+										<goals>
+											<goal>npm</goal>
+											<goal>
+												install-node-and-npm
+											</goal>
+											<goal>grunt</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											build-helper-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.8,)
+										</versionRange>
+										<goals>
+											<goal>parse-version</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<profiles>
 		<profile>
-			<id>deploy-server</id>
+			<id>deploy-local</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -110,42 +168,4 @@
 		</profile>
 	</profiles>
 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>gr.abiss.mvn.plugins</groupId>
-				<artifactId>maven-jstools-plugin</artifactId>
-				<version>${maven-jstools-plugin.version}</version>
-				<configuration>
-					<sourceJsFolder>de.profi.kita.maven.parent/${project.artifactId}/www/js</sourceJsFolder>
-					<jsDir>de.profi.kita.maven.parent/${project.artifactId}/www/js</jsDir>
-					<includePrivate>true</includePrivate>
-					<includeUndocumented>true</includeUndocumented>
-				</configuration>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>jslint</report>
-							<report>jsdoc</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-		</plugins>
-	</reporting>
-
-	<dependencies>
-		<dependency>
-			<groupId>gr.abiss.mvn.plugins</groupId>
-			<artifactId>maven-jstools-plugin</artifactId>
-			<version>${maven-jstools-plugin.version}</version>
-			<exclusions>
-				<exclusion>
-					<!-- rhino is only needed for reporting, not WAR runtime -->
-					<groupId>rhino</groupId>
-					<artifactId>js</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-	</dependencies>
 </project>

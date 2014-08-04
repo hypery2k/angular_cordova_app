@@ -23,3 +23,9 @@ app/node/*
 app/.classpath
 app/www/bower_components/*
 node_modules/.bin/grunt*
+
+app/.classpath
+app/.project
+**/.settings/*
+
+server/mem.h2.db
