@@ -22,11 +22,13 @@ to see this page in browser
 
 <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 
+<!-- build:css(./) styles/main.css -->
 <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-base.css">
 <link rel="stylesheet" href="bower_components/angular-block-ui/angular-block-ui.css" />
+<!-- endbuild -->
 
-<!-- build:css(.tmp) styles/main.css -->
-<link rel="stylesheet" href="styles/main.css">
+<!-- build:css styles/app.css -->
+<link rel="stylesheet" href="styles/app.css">
 <!-- endbuild -->
 </head>
 <body ng-app="MobileAngularUiExamples" ng-controller="MainController">
@@ -101,10 +103,10 @@ to see this page in browser
 	<script src="cordova_plugins.js"></script>
 
 	<!-- build:js scripts/plugins.js -->
-	<script src="bower_components/angular/angular.js"></script>
 	<!-- endbuild -->
 
-	<!-- build:js scripts/modules.js -->
+	<!-- build:js(./) scripts/modules.js -->
+	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-cache/dist/angular-cache.min.js"></script>
 	<script src="bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -117,7 +119,7 @@ to see this page in browser
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<!-- endbuild -->
 
-	<!-- build:js({.tmp,src}) scripts/scripts.js -->
+	<!-- build:js scripts/scripts.js -->
 	<script src="scripts/app.js"></script>
 	<script src="scripts/controllers/main.js"></script>
 	<!-- endbuild -->
