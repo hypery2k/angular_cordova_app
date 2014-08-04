@@ -6,6 +6,8 @@ module.exports = function(config){
 
     // Override base config
     config.set({
+        // web server port
+        port: 10080,
         singleRun: true,
         autoWatch: false
     });
