@@ -21,7 +21,8 @@ app/node_modules/*
 app/bower_components/*
 app/node/*
 app/.classpath
-app/www/bower_components/*
+app/www/*
+app/.tmp*
 node_modules/.bin/grunt*
 
 app/.classpath
@@ -29,3 +30,4 @@ app/.project
 **/.settings/*
 
 server/mem.h2.db
+
