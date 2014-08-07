@@ -32,6 +32,7 @@ package de.mare.mobile.ws;
 
 /**
  * Simple Chart service
+ * 
  * @author mreinhardt
  * 
  */

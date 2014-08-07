@@ -30,32 +30,41 @@
 package de.mare.mobile.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-@Table
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 public class User implements Serializable {
 
 	/**
 	 * Serial ID
 	 */
 	private static final long serialVersionUID = -8879332249157192528L;
-	
+
 	@Id
 	@GeneratedValue
-	private Long              id;
+	private Long id;
 
-	private String            username;
+	private String username;
 
-	private String            firstname;
+	private String firstname;
 
-	private String            lastname;
+	private String lastname;
+
+	@Temporal(TemporalType.DATE)
+	@Transient
+	private Date loadDate = new Date();
 
 	public Long getId() {
 		return id;
@@ -104,6 +113,43 @@ public class User implements Serializable {
 	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+
+	/**
+	 * @return the loadDate
+	 */
+	public Date getLoadDate() {
+		return loadDate;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [");
+		if (id != null) {
+			builder.append("id=");
+			builder.append(id);
+			builder.append(", ");
+		}
+		if (username != null) {
+			builder.append("username=");
+			builder.append(username);
+			builder.append(", ");
+		}
+		if (firstname != null) {
+			builder.append("firstname=");
+			builder.append(firstname);
+			builder.append(", ");
+		}
+		if (lastname != null) {
+			builder.append("lastname=");
+			builder.append(lastname);
+		}
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

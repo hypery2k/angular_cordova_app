@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: UserService.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: RsHelper.java, 04.08.2014, 15:54:54, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -30,47 +30,53 @@
  */
 package de.mare.mobile.ws;
 
-import java.util.List;
+import java.io.IOException;
+import java.net.URI;
 
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.junit.After;
+import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import de.mare.mobile.domain.User;
-import de.mare.mobile.domain.dto.UserDTO;
-import de.mare.mobile.services.UserRepository;
+import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
 
 /**
- * Simple user service
- * 
  * @author mreinhardt
- * 
+ *
  */
-@Path("users")
-public class UserService {
+public abstract class RsTest {
+	/**
+	 * Logger
+	 */
+	protected static final Logger LOG = LoggerFactory.getLogger(RsTest.class);
 
-	@Inject
-	private UserRepository userRepository;
+	public static final URI BASE_URI = URI.create("http://localhost:10080/");
 
-	@POST
-	@Consumes("application/json")
-	@Path("add")
-	public Response addUser(final UserDTO pUser) {
-		userRepository.addUser(pUser.getUser());
-		return Response.status(Status.OK).build();
+	private HttpServer threadSelector;
+
+	@Before
+	public void before() {
+		try {
+			threadSelector = GrizzlyServerFactory.createHttpServer(BASE_URI);
+			LOG.info("HTTP-Status (running: " + threadSelector.isStarted()
+			    + ") ");
+		} catch (IllegalArgumentException e) {
+			LOG.error(
+			    "HTTP-Server couldn't be started due to argurments error",
+			    e);
+		} catch (NullPointerException e) {
+			LOG.error(
+			    "HTTP-Server couldn't be started due to NullPointer error",
+			    e);
+		} catch (IOException e) {
+			LOG.error("HTTP-Server already running", e);
+		}
 	}
 
-	@GET
-	@Produces("application/json")
-	@Path("all")
-	public Response all() {
-		List<User> users = userRepository.getAllUsers();
-		return Response.status(Status.OK).entity(users).build();
+	@After
+	public void after() {
+		// closing http server after test
+		threadSelector.stop();
 	}
-
 }

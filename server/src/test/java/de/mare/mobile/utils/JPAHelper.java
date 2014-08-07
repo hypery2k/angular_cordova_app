@@ -17,7 +17,7 @@ public class JPAHelper {
 
 	protected static EntityManagerFactory emf;
 
-	protected static EntityManager        em;
+	protected static EntityManager em;
 
 	/**
 	 * Set up entity maneger and factory

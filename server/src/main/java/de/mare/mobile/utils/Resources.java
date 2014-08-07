@@ -45,7 +45,7 @@ public class Resources {
 	 * Create injection of entity manager
 	 */
 	@Produces
-	@PersistenceContext(unitName = "Chat")
+	@PersistenceContext(unitName = AppConstants.PU_NAME)
 	private EntityManager em;
 
 }

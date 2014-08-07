@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: BasicJPATest.java, 30.07.2014, 17:01:38, mreinhardt
+ * File: SimpleRSTest.java, 18.07.2014, 12:49:55, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,34 +28,50 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.domain;
+package de.mare.mobile.ws;
 
-import javax.persistence.EntityManager;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import de.mare.mobile.utils.EmHelper;
-import de.mare.mobile.utils.JPAHelper;
+import com.sun.jersey.api.client.WebResource;
+
+import de.mare.mobile.domain.dto.AppInfo;
+import de.mare.mobile.utils.RsUtil;
 
 /**
- * Very basic low level JPA based tests
- * 
  * @author mreinhardt
- *
+ * 
  */
-public class BasicJPATest extends JPAHelper {
-	@Test
-	public final void testPositive() throws Exception {
-		EmHelper.execute(new EmHelper.Runnable() {
+public class AppRSIT {
+	/**
+	 * Logger
+	 */
+	protected static final Logger LOG = LoggerFactory.getLogger(AppRSIT.class);
 
-			@Override
-			public void execute(final EntityManager em) throws Exception {
-				// method is left empty intentionally, just init the persistence and
-				// check for fundamental
-				// errors, like named query
-				// errors
-			}
-		}, em);
+	// Base URL
+	private final WebResource baseWebRes = RsUtil.getRestRessource(null, null,
+	    "http://localhost:8080/cordova-app/api/app");
+
+	@Test
+	public void testMemoryInfo() {
+		final WebResource webRes = this.baseWebRes.path("memory");
+		LOG.debug("URL for RS-Webservice: " + this.baseWebRes.toString());
+		final String memInfo = webRes.get(String.class);
+		assertNotNull(memInfo);
+		LOG.debug("Result for memory info " + memInfo);
+	}
+
+	@Test
+	public void testInfo() {
+		final WebResource webRes = this.baseWebRes.path("info");
+		LOG.debug("URL for RS-Webservice: " + this.baseWebRes.toString());
+		final AppInfo infoDtls = webRes.get(AppInfo.class);
+		assertNotNull(infoDtls);
+		LOG.debug("Result for memory info " + infoDtls);
+
 	}
 
 }

@@ -1,7 +1,7 @@
 /**
- * Cordova Angular JE22 Demo App
+ * Cordova Angular JEE Demo App
  *
- * File: UserService.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: BasicJPATest.java, 30.07.2014, 17:01:38, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,49 +28,38 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.ws;
+package de.mare.mobile.domain;
 
-import java.util.List;
+import javax.persistence.EntityManager;
 
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import org.junit.Test;
 
-import de.mare.mobile.domain.User;
-import de.mare.mobile.domain.dto.UserDTO;
-import de.mare.mobile.services.UserRepository;
+import de.mare.mobile.utils.EmHelper;
+import de.mare.mobile.utils.JPAHelper;
 
 /**
- * Simple user service
+ * This test checks basic
  * 
  * @author mreinhardt
- * 
+ *
  */
-@Path("users")
-public class UserService {
+public class PersistenceTest extends JPAHelper {
 
-	@Inject
-	private UserRepository userRepository;
+	/**
+	 * just init the persistence and check for fundamental errors, like named
+	 * query errors
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public final void testBasicJpaViaHibernate() throws Exception {
+		EmHelper.execute(new EmHelper.Runnable() {
 
-	@POST
-	@Consumes("application/json")
-	@Path("add")
-	public Response addUser(final UserDTO pUser) {
-		userRepository.addUser(pUser.getUser());
-		return Response.status(Status.OK).build();
-	}
-
-	@GET
-	@Produces("application/json")
-	@Path("all")
-	public Response all() {
-		List<User> users = userRepository.getAllUsers();
-		return Response.status(Status.OK).entity(users).build();
+			@Override
+			public void execute(final EntityManager em) throws Exception {
+				// method is left empty intentionally
+			}
+		}, em);
 	}
 
 }

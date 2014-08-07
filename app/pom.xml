@@ -11,7 +11,7 @@
 	<artifactId>app</artifactId>
 	<name>angularCordovaApp</name>
 	<description>MobileApp based on Cordova and AngularJS</description>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<build>
 		<plugins>

@@ -26,10 +26,7 @@
  */
 package de.mare.mobile.services;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import de.mare.mobile.utils.AppConstants;
+import de.mare.mobile.domain.Message;
 
 /**
  * 
@@ -38,7 +35,14 @@ import de.mare.mobile.utils.AppConstants;
  */
 public class MessageService {
 
-	@PersistenceContext(unitName = AppConstants.PU_NAME)
-	private EntityManager entityManager;
+	/**
+	 * 
+	 * @param pMessageToSave
+	 * @return
+	 */
+	public Message addMessage(final Message pMessageToSave) {
+		//entityManager.persist(pUserToSave);
+		return pMessageToSave;
+	}
 
 }

@@ -37,15 +37,16 @@ import org.junit.Test;
 import com.sun.jersey.api.client.WebResource;
 
 import de.mare.mobile.domain.dto.AppInfo;
+import de.mare.mobile.utils.RsUtil;
 
 /**
  * @author mreinhardt
  * 
  */
-public class AppRSTest extends RsHelper {
+public class AppRSTest extends RsTest {
 
 	// Base URL
-	private final WebResource baseWebRes = getRestRessource(null, null, "app");
+	private final WebResource baseWebRes = RsUtil.getRestRessource(null, null, BASE_URI + "app");
 
 	@Test
 	public void testMemoryInfo() {

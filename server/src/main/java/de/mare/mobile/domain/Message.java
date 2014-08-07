@@ -56,16 +56,16 @@ public class Message implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long              id;
+	private Long id;
 
-	private User              sender;
+	private User sender;
 
-	private User              recipient;
+	private User recipient;
 
 	@Size(min = 1, max = 250)
-	private String            text;
+	private String text;
 
-	private Date              created;
+	private Date created;
 
 	public Long getId() {
 		return id;

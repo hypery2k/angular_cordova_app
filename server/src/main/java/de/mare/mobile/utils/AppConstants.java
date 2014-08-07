@@ -35,7 +35,7 @@ package de.mare.mobile.utils;
  *
  */
 public class AppConstants {
-	
-	public final static String PU_NAME ="Chat";
+
+	public final static String PU_NAME = "chatPU";
 
 }

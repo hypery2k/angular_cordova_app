@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: RsHelper.java, 04.08.2014, 15:54:54, mreinhardt
+ * File: RsUtil.java, 07.08.2014, 15:36:03, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,78 +28,34 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.ws;
-
-import java.io.IOException;
-import java.net.URI;
-
-import org.glassfish.grizzly.http.server.HttpServer;
-import org.junit.After;
-import org.junit.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package de.mare.mobile.utils;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
-import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
 
 /**
  * @author mreinhardt
  *
  */
-public abstract class RsHelper {
-	/**
-	 * Logger
-	 */
-	protected static final Logger LOG = LoggerFactory.getLogger(RsHelper.class);
-
-	private static final URI BASE_URI = URI.create("http://localhost:10080/");
-
-	private HttpServer threadSelector;
-
-	@Before
-	public void before() {
-		try {
-			threadSelector = GrizzlyServerFactory.createHttpServer(BASE_URI);
-			LOG.info("HTTP-Status (running: " + threadSelector.isStarted()
-			    + ") ");
-		} catch (IllegalArgumentException e) {
-			LOG.error(
-			    "HTTP-Server couldn't be started due to argurments error",
-			    e);
-		} catch (NullPointerException e) {
-			LOG.error(
-			    "HTTP-Server couldn't be started due to NullPointer error",
-			    e);
-		} catch (IOException e) {
-			LOG.error("HTTP-Server already running", e);
-		}
-	}
-
-	@After
-	public void after() {
-		// closing http server after test
-		threadSelector.stop();
-	}
-
-	// HELPER
+public class RsUtil {
 
 	/**
 	 * 
 	 * @param pUsername
 	 * @param pPassword
-	 * @param pBaseUrl
+	 * @param pURL
 	 * @return
 	 */
 	public static WebResource getRestRessource(final String pUsername, final String pPassword,
-	    final String pBaseUrl) {
+	    final String pURL) {
 		Client client = Client.create();
 		if (pUsername != null && pPassword != null) {
 			client.addFilter(new HTTPBasicAuthFilter(pUsername, pPassword));
 
 		}
-		WebResource baseWebRes = client.resource(BASE_URI + pBaseUrl);
+		WebResource baseWebRes = client.resource(pURL);
 		return baseWebRes;
 	}
+
 }
