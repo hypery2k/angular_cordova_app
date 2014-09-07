@@ -22,9 +22,13 @@ Note, that sudo may be required depending on your setup.
 
 Run the app in your browser:
 
-http://localhost:9000
+http://localhost:9000 (open chrome with open /Applications/Google\ Chrome.app --args --disable-web-security to http://127.0.0.1:9000/#/)
 
- (open chrome with open /Applications/Google\ Chrome.app --args --disable-web-security to http://127.0.0.1:9000/#/)
+=======
+
+Note, that sudo may be required depending on your setup.
+
+Run the app in your browser: http://localhost:9000
 
 ## iOS development
 
