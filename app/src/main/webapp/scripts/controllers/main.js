@@ -1,49 +1,69 @@
-app.controller('MainController', function($rootScope, $scope, analytics){
+app.controller('AppController', function($rootScope, $scope) {
+  $rootScope.loading = false;
 
-  $rootScope.$on("$routeChangeStart", function(){
+  $rootScope.$on("$routeChangeStart", function() {
     $rootScope.loading = true;
   });
 
-  $rootScope.$on("$routeChangeSuccess", function(){
+  $rootScope.$on("$routeChangeSuccess", function() {
     $rootScope.loading = false;
   });
 
-  var scrollItems = [];
+});
 
-  for (var i=1; i<=100; i++) {
-    scrollItems.push("Item " + i);
+app.controller('ChatController', function($rootScope, $scope, $routeParams, UserService, SettingsService) {
+  var username = $routeParams.username,
+    settings = SettingsService.load();
+
+  function initChat() {
+    $scope.sender = settings.username;
+    $scope.recipient = username;
   }
 
-  $scope.scrollItems = scrollItems;
-  $scope.invoice = {payed: true};
-  
-  $scope.userAgent =  navigator.userAgent;
-  $scope.chatUsers = [
-    { name: "Carlos  Flowers", online: true },
-    { name: "Byron Taylor", online: true },
-    { name: "Jana  Terry", online: true },
-    { name: "Darryl  Stone", online: true },
-    { name: "Fannie  Carlson", online: true },
-    { name: "Holly Nguyen", online: true },
-    { name: "Bill  Chavez", online: true },
-    { name: "Veronica  Maxwell", online: true },
-    { name: "Jessica Webster", online: true },
-    { name: "Jackie  Barton", online: true },
-    { name: "Crystal Drake", online: false },
-    { name: "Milton  Dean", online: false },
-    { name: "Joann Johnston", online: false },
-    { name: "Cora  Vaughn", online: false },
-    { name: "Nina  Briggs", online: false },
-    { name: "Casey Turner", online: false },
-    { name: "Jimmie  Wilson", online: false },
-    { name: "Nathaniel Steele", online: false },
-    { name: "Aubrey  Cole", online: false },
-    { name: "Donnie  Summers", online: false },
-    { name: "Kate  Myers", online: false },
-    { name: "Priscilla Hawkins", online: false },
-    { name: "Joe Barker", online: false },
-    { name: "Lee Norman", online: false },
-    { name: "Ebony Rice", online: false }
-  ]
+  // auto init
+  initChat();
+
+});
+
+app.controller('UsersController', function($rootScope, $scope, UserService) {
+
+  function loadUsers() {
+    UserService.listAllUsers().then(
+      function(response) {
+        $scope.users = response.data;
+      }
+    );
+  }
+
+  // auto init
+  loadUsers();
+
+});
+
+app.controller('NavigationController', function($rootScope, $scope, SettingsService) {
+  $scope.settings = SettingsService.load();
+});
+
+app.controller('SettingsController', function($rootScope, $scope, $location, SettingsService) {
+  "use strict";
+
+
+  function loadSettings() {
+    $scope.settings = SettingsService.load();
+  }
+
+  function saveSettings() {
+    SettingsService.save($scope.settings);
+    // redirect
+    $location.path("/");
+    window.location.reload();
+  }
+
+  // public methods
+  $scope.load = loadSettings;
+  $scope.save = saveSettings;
+
+  // auto init
+  loadSettings();
 
 });

@@ -30,4 +30,5 @@ app/.project
 **/.settings/*
 
 server/mem.h2.db
-
+server/logs/*
+target/*

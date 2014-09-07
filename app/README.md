@@ -7,20 +7,24 @@ Based on [mobile-angular-ui](https://github.com/mcasimir/mobile-angular-ui)
 
 ## Dev
 
-- install [node.js](http://nodejs.org/download/)
-- (sudo) npm install -g grunt-cli
-- (sudo) npm install -g cordova-gen-icon
-- (sudo) npm install grunt (for grunt dependencies.)
-- (sudo) npm install
-- grunt connect
+* Install nodejs and npm (http://nodejs.org/download/)
+* Install ruby
+  * `(sudo) gem install compass`
+* Install Cordova
+  * `(sudo) npm install -g cordova`
+* Install build tools
+  * `(sudo) npm install -g grunt-cli`
+  * `(sudo) npm install -g cordova-gen-icon` (optional, see https://bitbucket.org/ntakimura/cordova-gen-icon)
+  * `(sudo) npm install -g bower` (for bower dependencies.)
+  * `grunt server`
 
-sudo may be required depending on your setup
-
-https://bitbucket.org/ntakimura/cordova-gen-icon
+Note, that sudo may be required depending on your setup.
 
 Run the app in your browser:
 
-http://localhost:3001/www
+http://localhost:9000
+
+ (open chrome with open /Applications/Google\ Chrome.app --args --disable-web-security to http://127.0.0.1:9000/#/)
 
 ## iOS development
 

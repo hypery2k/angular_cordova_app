@@ -1,0 +1,26 @@
+<div content-for="title">
+  <span>Settings</span>
+</div>
+<div class="scrollable">
+    <div class="scrollable-content">
+        <form name="settingsForm" novalidate ng-submit="save()">
+            <div class="section container-fluid">
+                <div class="panel">
+                  <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
+                      <input bs-form-control name="username" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+                          data-ng-model="settings.username" 
+                          label="Username" label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
+                          placeholder="Your username" ng-required="true">
+                      <input bs-form-control name="password" type="password" autocomplete="on" autocorrect="on" autocapitalize="on" spellcheck="false" 
+                          data-ng-model="settings.password" 
+                          label="Password" label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
+                          placeholder="Your Password" ng-required="true">
+                  </div>                                    
+                  <div class="form-actions">
+                      <button type="submit" ng-disabled="settingsForm.$invalid" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
+                  </div> 
+               </div>
+            </div>
+        </form>
+    </div>
+</div>

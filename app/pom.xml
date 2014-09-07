@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>app</artifactId>
-	<name>angularCordovaApp</name>
+	<name>cordova-app</name>
 	<description>MobileApp based on Cordova and AngularJS</description>
 	<packaging>war</packaging>
 

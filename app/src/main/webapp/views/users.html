@@ -1,0 +1,17 @@
+<div class="scrollable">
+  <div class="scrollable-content">
+    <div class="list-group">        
+        <a ng-repeat="user in users" href="#/user/{{user.username}}" class="list-group-item media">
+          <div class="pull-left">
+            <i class="fa fa-user chat-user-avatar"></i>
+          </div>
+          <div class="media-body">
+            {{ user.firstname }} {{ user.lastname }}
+            <br>
+            {{ user.username }} 
+             <i class="fa fa-chevron-right pull-right"></i>
+          </div>
+        </a>
+    </div>
+  </div>
+</div>

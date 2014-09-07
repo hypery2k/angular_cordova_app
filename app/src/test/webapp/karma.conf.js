@@ -19,12 +19,12 @@ module.exports = function(config) {
       '../../../bower_components/angular-mocks/angular-mocks.js',
       '../../../bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js',
       '../../../bower_components/angular-block-ui/angular-block-ui.js',
+      '../../../bower_components/angular-local-storage/angular-local-storage.js',
       '../../../bower_components/angular-bootstrap/ui-bootstrap.js',
       '../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       '../../main/webapp/scripts/*.js',
       '../../main/webapp/scripts/**/*.js',
       'controllers/*.js',
-      '*.js'
     ],
     exclude: ['src/test/javascript/karma.conf*.js'],
     reporters: ['progress'],
@@ -58,6 +58,6 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: false,
-    plugins: ['karma-jasmine','karma-phantomjs-launcher']
+    plugins: ['karma-jasmine', 'karma-phantomjs-launcher']
   });
 };
