@@ -1,7 +1,7 @@
 /**
  * Angular Cordova Demo using JEE7 backend
  *
- * File: Message.java, 30.07.2014, 12:49:55, mreinhardt
+ * File: Job.java, 19.08.2014, 18:49:55, mreinhardt
  *
  * @project https://github.com/hypery2k/angular_cordova_app
  *
@@ -26,116 +26,113 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.domain;
+package de.mare.mobile.domain.cv;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Simple domain entity showing bean validation and JPA persistence
  * 
  * @author mreinhardt
- * 
+ *
  */
 @Entity
 @XmlRootElement
-public class Message implements Serializable {
+public class Job implements Serializable {
 
 	/**
 	 * Serial ID
 	 */
-	private static final long serialVersionUID = 6159476170891010597L;
+	private static final long serialVersionUID = -2338574281995851944L;
 
 	@Id
 	@GeneratedValue
-	@Column(name = "msg_id")
+	@Column(name = "job_id")
 	private Long id;
 
-	private User sender;
+	@NotNull
+	@Valid
+	private String position;
 
-	private User recipient;
+	private String employer;
 
-	@Size(min = 1, max = 250)
-	private String text;
+	@Column(name = "date_from")
+	@NotNull
+	private Date from;
+	
+	@Column(name = "date_to")
+	private Date to;
 
-	private Date created;
+	@OneToMany
+	private List<Project> projects;
 
-	public Long getId() {
-		return id;
+	public String getPosition() {
+		return position;
 	}
 
-	public User getSender() {
-		return sender;
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
-	public void setSender(User sender) {
-		this.sender = sender;
+	public String getEmployer() {
+		return employer;
 	}
 
-	public User getRecipient() {
-		return recipient;
+	public void setEmployer(String employer) {
+		this.employer = employer;
 	}
 
-	public void setRecipient(User recipient) {
-		this.recipient = recipient;
+	public Date getFrom() {
+		return from;
 	}
 
-	public String getText() {
-		return text;
+	public void setFrom(Date from) {
+		this.from = from;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public Date getTo() {
+		return to;
 	}
 
-	public Date getCreated() {
-		return created;
+	public void setTo(Date to) {
+		this.to = to;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 	/**
-	 * @see java.lang.Object#toString()
+	 * Generated
 	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Message [");
-		if (id != null) {
-			builder.append("id=");
-			builder.append(id);
-			builder.append(", ");
-		}
-		if (sender != null) {
-			builder.append("sender=");
-			builder.append(sender);
-			builder.append(", ");
-		}
-		if (recipient != null) {
-			builder.append("recipient=");
-			builder.append(recipient);
-			builder.append(", ");
-		}
-		if (text != null) {
-			builder.append("text=");
-			builder.append(text);
-			builder.append(", ");
-		}
-		if (created != null) {
-			builder.append("created=");
-			builder.append(created);
-		}
+		builder.append("ProfessionalExperience [position=");
+		builder.append(position);
+		builder.append(", employer=");
+		builder.append(employer);
+		builder.append(", from=");
+		builder.append(from);
+		builder.append(", to=");
+		builder.append(to);
+		builder.append(", projects=");
+		builder.append(projects);
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

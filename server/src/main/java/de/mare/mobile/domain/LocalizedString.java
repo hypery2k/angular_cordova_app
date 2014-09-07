@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: SimpleRS.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: LocalizedText.java, 19.08.2014, 20:36:18, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,48 +28,67 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.ws;
+package de.mare.mobile.domain;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.Serializable;
+import java.util.Locale;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import de.mare.mobile.domain.dto.AppInfo;
+import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Sample Info REST service, showing system information
- * 
  * @author mreinhardt
- * 
+ *
  */
-@Path("app")
-public class AppRS {
+@XmlRootElement
+@Embeddable
+public class LocalizedString implements Serializable {
 
-	@Path("memory")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public long freeMem() {
-		long memory = Runtime.getRuntime().freeMemory();
-		return memory;
+	/**
+	 * Serial ID
+	 */
+	private static final long serialVersionUID = 5953124050467195094L;
+
+	private Locale locale;
+
+	private String text;
+
+	public LocalizedString() {
 	}
 
-	@Path("info")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object info() throws UnknownHostException {
-		Response.ResponseBuilder response = null;
-
-		AppInfo infoObj = new AppInfo();
-		// build up info JSON
-		infoObj.setHostname(InetAddress.getLocalHost().getHostName());
-		infoObj.setFreeMemory(String.valueOf(Runtime.getRuntime().freeMemory()));
-
-		response = Response.status(Response.Status.OK).entity(infoObj);
-		return response.build();
+	public LocalizedString(final Locale pLocale, final String pText) {
+		this.locale = pLocale;
+		this.text = pText;
 	}
+
+	/**
+	 * @return the locale
+	 */
+	public Locale getLocale() {
+		return locale;
+	}
+
+	/**
+	 * @param locale
+	 *          the locale to set
+	 */
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	/**
+	 * @return the text
+	 */
+	public String getText() {
+		return text;
+	}
+
+	/**
+	 * @param text
+	 *          the text to set
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
+
 }

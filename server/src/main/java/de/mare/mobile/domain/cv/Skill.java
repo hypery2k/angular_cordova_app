@@ -1,7 +1,7 @@
 /**
  * Angular Cordova Demo using JEE7 backend
  *
- * File: Message.java, 30.07.2014, 12:49:55, mreinhardt
+ * File: Skill.java, 19.08.2014, 18:49:55, mreinhardt
  *
  * @project https://github.com/hypery2k/angular_cordova_app
  *
@@ -26,116 +26,83 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.domain;
+package de.mare.mobile.domain.cv;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Simple domain entity showing bean validation and JPA persistence
  * 
  * @author mreinhardt
- * 
+ *
  */
 @Entity
 @XmlRootElement
-public class Message implements Serializable {
-
+public class Skill implements Serializable {
 	/**
 	 * Serial ID
 	 */
-	private static final long serialVersionUID = 6159476170891010597L;
+	private static final long serialVersionUID = 20901458460872271L;
 
 	@Id
 	@GeneratedValue
-	@Column(name = "msg_id")
 	private Long id;
 
-	private User sender;
+	@NotNull
+	private String knowledge;
 
-	private User recipient;
+	@Digits(integer = 2, fraction = 1)
+	private BigDecimal experienceInYears;
 
-	@Size(min = 1, max = 250)
-	private String text;
+	@Enumerated(EnumType.ORDINAL)
+	private SkillLevel level;
 
-	private Date created;
-
-	public Long getId() {
-		return id;
+	public String getKnowledge() {
+		return knowledge;
 	}
 
-	public User getSender() {
-		return sender;
+	public void setKnowledge(String knowledge) {
+		this.knowledge = knowledge;
 	}
 
-	public void setSender(User sender) {
-		this.sender = sender;
+	public BigDecimal getExperienceInYears() {
+		return experienceInYears;
 	}
 
-	public User getRecipient() {
-		return recipient;
+	public void setExperienceInYears(BigDecimal experienceInYears) {
+		this.experienceInYears = experienceInYears;
 	}
 
-	public void setRecipient(User recipient) {
-		this.recipient = recipient;
+	public SkillLevel getLevel() {
+		return level;
 	}
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setLevel(SkillLevel level) {
+		this.level = level;
 	}
 
 	/**
-	 * @see java.lang.Object#toString()
+	 * Generated
 	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Message [");
-		if (id != null) {
-			builder.append("id=");
-			builder.append(id);
-			builder.append(", ");
-		}
-		if (sender != null) {
-			builder.append("sender=");
-			builder.append(sender);
-			builder.append(", ");
-		}
-		if (recipient != null) {
-			builder.append("recipient=");
-			builder.append(recipient);
-			builder.append(", ");
-		}
-		if (text != null) {
-			builder.append("text=");
-			builder.append(text);
-			builder.append(", ");
-		}
-		if (created != null) {
-			builder.append("created=");
-			builder.append(created);
-		}
+		builder.append("Competency [");
+		builder.append(knowledge);
+		builder.append(", ");
+		builder.append(experienceInYears);
+		builder.append(", ");
+		builder.append(level);
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

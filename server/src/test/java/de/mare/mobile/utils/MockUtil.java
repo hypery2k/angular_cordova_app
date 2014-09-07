@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: AppConstants.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: MockUtil.java, 07.09.2014, 14:34:29, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -30,15 +30,41 @@
  */
 package de.mare.mobile.utils;
 
-import javax.annotation.security.DeclareRoles;
+import java.lang.reflect.Field;
 
 /**
  * @author mreinhardt
  *
  */
-@DeclareRoles({ "user" })
-public class AppConstants {
+public class MockUtil {
 
-	public final static String PU_NAME = "chatPU";
+	/**
+	 * Set field, primary for injects
+	 * 
+	 * @param pBean
+	 *          bean which holds the field
+	 * @param fieldname
+	 *          name of the field
+	 * @param pInject
+	 *          object to set (inject)
+	 */
+	public static void setFieldStatic(final Object pBean, final String fieldname, final Object pInject) {
+		try {
 
+			final Field field = pBean.getClass().getDeclaredField(fieldname);
+			field.setAccessible(true);
+			field.set(pBean, pInject);
+			field.setAccessible(false);
+
+		} catch (final Exception e) {
+			try {
+				final Field field = pBean.getClass().getSuperclass().getDeclaredField(fieldname);
+				field.setAccessible(true);
+				field.set(pBean, pInject);
+				field.setAccessible(false);
+			} catch (final Exception e2) {
+				throw new RuntimeException(e2);
+			}
+		}
+	}
 }

@@ -30,41 +30,44 @@
  */
 package de.mare.mobile.ws;
 
-import static org.junit.Assert.assertNotNull;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.GenericType;
 
+import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.Test;
 
-import com.sun.jersey.api.client.WebResource;
-
 import de.mare.mobile.domain.dto.AppInfo;
-import de.mare.mobile.utils.RsUtil;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsNull.notNullValue;
 
 /**
+ * Test application info rest service
+ * 
  * @author mreinhardt
  * 
  */
 public class AppRSTest extends RsTest {
 
-	// Base URL
-	private final WebResource baseWebRes = RsUtil.getRestRessource(null, null, BASE_URI + "app");
+	@Override
+	protected Application configure() {
+		return new ResourceConfig(AppService.class);
+	}
 
 	@Test
 	public void testMemoryInfo() {
-		final WebResource webRes = this.baseWebRes.path("memory");
-		LOG.debug("URL for RS-Webservice: " + this.baseWebRes.toString());
-		final String memInfo = webRes.get(String.class);
-		assertNotNull(memInfo);
+		final String memInfo = target("app/memory").request().get(
+		    new GenericType<String>() {
+		    });
+		assertThat(memInfo, notNullValue());
 		LOG.debug("Result for memory info " + memInfo);
 	}
 
 	@Test
 	public void testInfo() {
-		final WebResource webRes = this.baseWebRes.path("info");
-		LOG.debug("URL for RS-Webservice: " + this.baseWebRes.toString());
-		final AppInfo infoDtls = webRes.get(AppInfo.class);
-		assertNotNull(infoDtls);
+		final AppInfo infoDtls = target("app/info").request().get(
+		    new GenericType<AppInfo>() {
+		    });
+		assertThat(infoDtls, notNullValue());
 		LOG.debug("Result for memory info " + infoDtls);
-
 	}
-
 }

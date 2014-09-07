@@ -2,8 +2,15 @@ package de.mare.mobile.domain.dto;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import de.mare.mobile.domain.User;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class UserDTO implements Serializable {
 
 	/**
@@ -71,6 +78,7 @@ public class UserDTO implements Serializable {
 		this.lastname = lastname;
 	}
 
+	@XmlTransient
 	/**
 	 * @return the user
 	 */

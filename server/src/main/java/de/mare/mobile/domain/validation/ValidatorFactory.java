@@ -1,9 +1,7 @@
 /**
- * Cordova Angular JE22 Demo App
+ * Angular Cordova Demo using JEE7 backend
  *
- * File: AppConstants.java, 18.07.2014, 12:49:55, mreinhardt
- *
- * https://www.martinreinhardt-online.de/apps
+ * File: ValidatorFactory.java, 19.08.2014, 18:49:55, mreinhardt
  *
  * @project https://github.com/hypery2k/angular_cordova_app
  *
@@ -28,17 +26,25 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.utils;
+package de.mare.mobile.domain.validation;
 
-import javax.annotation.security.DeclareRoles;
+import javax.validation.Validation;
+import javax.validation.Validator;
 
 /**
+ * 
  * @author mreinhardt
  *
  */
-@DeclareRoles({ "user" })
-public class AppConstants {
+public final class ValidatorFactory {
 
-	public final static String PU_NAME = "chatPU";
+	private static final javax.validation.ValidatorFactory VALIDATOR_FACTORY = Validation
+	    .buildDefaultValidatorFactory();
 
+	private ValidatorFactory() {
+	}
+
+	public static Validator getValidator() {
+		return VALIDATOR_FACTORY.getValidator();
+	}
 }

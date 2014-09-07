@@ -30,53 +30,83 @@
  */
 package de.mare.mobile.ws;
 
-import java.io.IOException;
-import java.net.URI;
+import java.util.UUID;
 
-import org.glassfish.grizzly.http.server.HttpServer;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import org.glassfish.jersey.test.JerseyTest;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
+import de.mare.mobile.domain.User;
+import de.mare.mobile.domain.enums.SecurityRole;
+import de.mare.mobile.utils.EmHelper;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 
 /**
  * @author mreinhardt
  *
  */
-public abstract class RsTest {
+public abstract class RsTest extends JerseyTest {
 	/**
 	 * Logger
 	 */
 	protected static final Logger LOG = LoggerFactory.getLogger(RsTest.class);
 
-	public static final URI BASE_URI = URI.create("http://localhost:10080/");
+	private User validTestuser = null;
 
-	private HttpServer threadSelector;
+	protected static EntityManagerFactory emf;
+
+	protected static EntityManager em;
 
 	@Before
-	public void before() {
-		try {
-			threadSelector = GrizzlyServerFactory.createHttpServer(BASE_URI);
-			LOG.info("HTTP-Status (running: " + threadSelector.isStarted()
-			    + ") ");
-		} catch (IllegalArgumentException e) {
-			LOG.error(
-			    "HTTP-Server couldn't be started due to argurments error",
-			    e);
-		} catch (NullPointerException e) {
-			LOG.error(
-			    "HTTP-Server couldn't be started due to NullPointer error",
-			    e);
-		} catch (IOException e) {
-			LOG.error("HTTP-Server already running", e);
-		}
+	public void before() throws Exception {
+		EmHelper.execute(new EmHelper.Runnable() {
+
+			@Override
+			public void execute(final EntityManager em) throws Exception {
+				// create valid test user before each test
+				setValidTestuser(new User.Builder().withFirstname("Max").withLastname("Mustermann")
+				    .withUsername("testuser" + UUID.randomUUID().toString()).withPassword("42")
+				    .withRole(SecurityRole.USER).build());
+				em.persist(validTestuser);
+				assertThat(validTestuser.getId(), is(greaterThan(0l)));
+			}
+		}, em);
+	}
+
+	@BeforeClass
+	public static void setup() throws Exception {
+		// Get the entity manager for the tests.
+		emf = Persistence.createEntityManagerFactory("chatTestPU");
+		em = emf.createEntityManager();
 	}
 
 	@After
 	public void after() {
-		// closing http server after test
-		threadSelector.stop();
+
+	}
+
+	/**
+	 * @return the validTestuser
+	 */
+	public User getValidTestuser() {
+		return validTestuser;
+	}
+
+	/**
+	 * @param validTestuser
+	 *          the validTestuser to set
+	 */
+	public void setValidTestuser(User validTestuser) {
+		this.validTestuser = validTestuser;
 	}
 }

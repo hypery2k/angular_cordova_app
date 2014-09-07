@@ -29,7 +29,6 @@ public class JPAHelper {
 		// Get the entity manager for the tests.
 		emf = Persistence.createEntityManagerFactory("chatTestPU");
 		em = emf.createEntityManager();
-
 	}
 
 }

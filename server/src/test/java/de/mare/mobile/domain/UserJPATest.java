@@ -1,7 +1,7 @@
 /**
- * Cordova Angular JE22 Demo App
+ * Cordova Angular JEE Demo App
  *
- * File: AppConstants.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: BasicJPATest.java, 30.07.2014, 17:01:38, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,17 +28,46 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.utils;
+package de.mare.mobile.domain;
 
-import javax.annotation.security.DeclareRoles;
+import javax.persistence.EntityManager;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import de.mare.mobile.domain.enums.SecurityRole;
+import de.mare.mobile.utils.EmHelper;
+import de.mare.mobile.utils.JPAHelper;
 
 /**
+ * This test checks basic
+ * 
  * @author mreinhardt
  *
  */
-@DeclareRoles({ "user" })
-public class AppConstants {
+public class UserJPATest extends JPAHelper {
 
-	public final static String PU_NAME = "chatPU";
+	/**
+	 * just init the persistence and check for fundamental errors, like named
+	 * query errors
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public final void testUserCreation() throws Exception {
+		EmHelper.execute(new EmHelper.Runnable() {
+
+			@Override
+			public void execute(final EntityManager em) throws Exception {
+				// method is left empty intentionally
+
+				User user = new User.Builder().withFirstname("Max").withLastname("Mustermann")
+				    .withUsername("maxm").withRole(SecurityRole.USER).build();
+				em.persist(user);
+				assertTrue(user.getId() > 0);
+			}
+		}, em);
+	}
 
 }

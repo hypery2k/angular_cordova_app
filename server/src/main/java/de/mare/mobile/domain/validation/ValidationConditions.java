@@ -1,9 +1,7 @@
 /**
- * Cordova Angular JE22 Demo App
+ * Angular Cordova Demo using JEE7 backend
  *
- * File: AppConstants.java, 18.07.2014, 12:49:55, mreinhardt
- *
- * https://www.martinreinhardt-online.de/apps
+ * File: ValidationConditions.java, 19.08.2014, 18:49:55, mreinhardt
  *
  * @project https://github.com/hypery2k/angular_cordova_app
  *
@@ -28,17 +26,43 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.utils;
+package de.mare.mobile.domain.validation;
 
-import javax.annotation.security.DeclareRoles;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 /**
+ * 
  * @author mreinhardt
  *
  */
-@DeclareRoles({ "user" })
-public class AppConstants {
+public final class ValidationConditions {
 
-	public final static String PU_NAME = "chatPU";
+	private ValidationConditions() {
+	}
 
+	/**
+	 * Triggers a JSR-303 validation process of the given bean.
+	 *
+	 * @param beanToBeValidated
+	 *          Object of type {@code T} which is to be validated.
+	 * @param validatorFactory
+	 * @throws IllegalArgumentException
+	 *           if {@code beanToBeValidated} is not valid. Error message is a
+	 *           concatenation of messages of all constraint violations.
+	 */
+	public static <T> void isValid(T beanToBeValidated, Validator validator) {
+		Set<ConstraintViolation<T>> violations = validator.validate(beanToBeValidated);
+
+		if (!violations.isEmpty()) {
+			StringBuilder errorMessage = new StringBuilder();
+			for (ConstraintViolation<T> violation : violations) {
+				errorMessage.append(String.format("%s: \"%s\" ... %s\n", violation.getPropertyPath(),
+				    violation.getInvalidValue(), violation.getMessage()));
+			}
+			throw new IllegalArgumentException(errorMessage.toString());
+		}
+	}
 }

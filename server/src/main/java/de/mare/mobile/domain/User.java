@@ -32,6 +32,7 @@ package de.mare.mobile.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,11 +41,26 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import de.mare.mobile.domain.enums.SecurityRole;
+import de.mare.mobile.domain.validation.ValidationConditions;
+import de.mare.mobile.domain.validation.ValidatorFactory;
+
+/**
+ * User entity
+ * 
+ * @author mreinhardt
+ *
+ */
 @Entity
 @XmlRootElement
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
+@XmlAccessorType(XmlAccessType.FIELD)
+@Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 public class User implements Serializable {
 
 	/**
@@ -54,17 +70,50 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "user_id")
 	private Long id;
 
+	@XmlElement
+	@Column(name = "USERNAME")
 	private String username;
 
+	@XmlElement
+	@Column(name = "FIRSTNAME")
 	private String firstname;
 
+	@XmlElement
+	@Column(name = "LASTNAME")
 	private String lastname;
+
+	@Column(name = "PASSWORD")
+	private String password;
+
+	@Column(name = "ROLE")
+	@NotNull
+	@XmlElement
+	private String role;
 
 	@Temporal(TemporalType.DATE)
 	@Transient
 	private Date loadDate = new Date();
+
+	public User() {
+
+	}
+
+	/**
+	 * Construct with builder
+	 * 
+	 * @param pBuilder
+	 */
+	public User(Builder pBuilder) {
+		super();
+		this.username = pBuilder.username;
+		this.firstname = pBuilder.firstname;
+		this.lastname = pBuilder.lastname;
+		this.password = pBuilder.password;
+		setRole(pBuilder.role);
+	}
 
 	public Long getId() {
 		return id;
@@ -116,6 +165,40 @@ public class User implements Serializable {
 	}
 
 	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password
+	 *          the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the securityRole
+	 */
+	public final SecurityRole getRole() {
+		return SecurityRole.getByName(this.role);
+	}
+
+	/**
+	 * @param pSecurityRole
+	 *          the securityRole to set
+	 */
+	public final void setRole(final SecurityRole pSecurityRole) {
+		if (pSecurityRole != null) {
+			this.role = pSecurityRole.getName();
+		} else {
+			this.role = null;
+		}
+	}
+
+	/**
 	 * @return the loadDate
 	 */
 	public Date getLoadDate() {
@@ -150,6 +233,50 @@ public class User implements Serializable {
 		}
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public static class Builder {
+
+		private String username;
+
+		private String firstname;
+
+		private String lastname;
+
+		private String password;
+
+		private SecurityRole role;
+
+		public Builder withUsername(String pUsername) {
+			this.username = pUsername;
+			return this;
+		}
+
+		public Builder withFirstname(String pFirstname) {
+			this.firstname = pFirstname;
+			return this;
+		}
+
+		public Builder withLastname(String pLastname) {
+			this.lastname = pLastname;
+			return this;
+		}
+
+		public Builder withPassword(String pPassword) {
+			this.password = pPassword;
+			return this;
+		}
+
+		public Builder withRole(SecurityRole pSecurityRole) {
+			this.role = pSecurityRole;
+			return this;
+		}
+
+		public User build() {
+			User newUser = new User(this);
+			ValidationConditions.isValid(newUser, ValidatorFactory.getValidator());
+			return newUser;
+		}
 	}
 
 }

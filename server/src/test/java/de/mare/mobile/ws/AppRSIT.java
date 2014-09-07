@@ -30,46 +30,47 @@
  */
 package de.mare.mobile.ws;
 
-import static org.junit.Assert.assertNotNull;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sun.jersey.api.client.WebResource;
-
 import de.mare.mobile.domain.dto.AppInfo;
 import de.mare.mobile.utils.RsUtil;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.IsNull.notNullValue;
 
 /**
  * @author mreinhardt
  * 
  */
-public class AppRSIT {
+public class AppRSIT extends RsTest {
 	/**
 	 * Logger
 	 */
 	protected static final Logger LOG = LoggerFactory.getLogger(AppRSIT.class);
 
-	// Base URL
-	private final WebResource baseWebRes = RsUtil.getRestRessource(null, null,
-	    "http://localhost:8080/cordova-app/api/app");
-
 	@Test
 	public void testMemoryInfo() {
-		final WebResource webRes = this.baseWebRes.path("memory");
-		LOG.debug("URL for RS-Webservice: " + this.baseWebRes.toString());
-		final String memInfo = webRes.get(String.class);
-		assertNotNull(memInfo);
+		final Response webRes = RsUtil.getRestRessource("user1",
+		    "user1", "http://localhost:8080/cordova-app/api/app/memory");
+		final String memInfo = webRes.readEntity(new GenericType<String>() {
+		});
+		assertThat(memInfo, notNullValue());
+		assertThat(new Long(memInfo), is(greaterThan(0l)));
 		LOG.debug("Result for memory info " + memInfo);
 	}
 
 	@Test
 	public void testInfo() {
-		final WebResource webRes = this.baseWebRes.path("info");
-		LOG.debug("URL for RS-Webservice: " + this.baseWebRes.toString());
-		final AppInfo infoDtls = webRes.get(AppInfo.class);
-		assertNotNull(infoDtls);
+		final Response webRes = RsUtil.getRestRessource("user1",
+		    "user1", "http://localhost:8080/cordova-app/api/app/info");
+		final AppInfo infoDtls = webRes.readEntity(new GenericType<AppInfo>() {
+		});
+		assertThat(infoDtls, notNullValue());
 		LOG.debug("Result for memory info " + infoDtls);
 
 	}

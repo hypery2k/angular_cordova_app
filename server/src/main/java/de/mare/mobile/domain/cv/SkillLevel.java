@@ -1,9 +1,7 @@
 /**
- * Cordova Angular JE22 Demo App
+ * Angular Cordova Demo using JEE7 backend
  *
- * File: AppConstants.java, 18.07.2014, 12:49:55, mreinhardt
- *
- * https://www.martinreinhardt-online.de/apps
+ * File: SkillLevel.java, 19.08.2014, 18:49:55, mreinhardt
  *
  * @project https://github.com/hypery2k/angular_cordova_app
  *
@@ -28,17 +26,28 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.utils;
-
-import javax.annotation.security.DeclareRoles;
+package de.mare.mobile.domain.cv;
 
 /**
+ * 
  * @author mreinhardt
  *
  */
-@DeclareRoles({ "user" })
-public class AppConstants {
+public enum SkillLevel {
 
-	public final static String PU_NAME = "chatPU";
+	JUNIOR("junior"),
+	INTERMEDIATE("intermediate"),
+	SENIOR("senior");
 
+	private static final String LOCALIZATION_KEY_PREFIX = "competency.level.";
+
+	private final String localizationKeySuffix;
+
+	private SkillLevel(String localizationKeySuffix) {
+		this.localizationKeySuffix = localizationKeySuffix;
+	}
+
+	public String getLocalizationKey() {
+		return LOCALIZATION_KEY_PREFIX + localizationKeySuffix;
+	}
 }

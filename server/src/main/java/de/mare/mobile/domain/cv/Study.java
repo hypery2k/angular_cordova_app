@@ -1,7 +1,7 @@
 /**
  * Angular Cordova Demo using JEE7 backend
  *
- * File: Message.java, 30.07.2014, 12:49:55, mreinhardt
+ * File: Study.java, 19.08.2014, 18:49:55, mreinhardt
  *
  * @project https://github.com/hypery2k/angular_cordova_app
  *
@@ -26,7 +26,7 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.domain;
+package de.mare.mobile.domain.cv;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -35,107 +35,112 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Simple domain entity showing bean validation and JPA persistence
  * 
  * @author mreinhardt
- * 
+ *
  */
 @Entity
 @XmlRootElement
-public class Message implements Serializable {
+public class Study implements Serializable {
 
 	/**
 	 * Serial ID
 	 */
-	private static final long serialVersionUID = 6159476170891010597L;
+	private static final long serialVersionUID = -1899405770753294216L;
 
 	@Id
 	@GeneratedValue
-	@Column(name = "msg_id")
+	@Column(name = "study_id")
 	private Long id;
 
-	private User sender;
+	@Column(name = "date_from")
+	@NotNull
+	private Date from;
 
-	private User recipient;
+	@Column(name = "date_to")
+	@NotNull
+	private Date to;
 
-	@Size(min = 1, max = 250)
-	private String text;
+	@NotNull
+	private String schoolName;
 
-	private Date created;
+	private String specialization;
 
-	public Long getId() {
-		return id;
+	private String reachedTitle;
+
+	private String studyType;
+
+	public Date getFrom() {
+		return from;
 	}
 
-	public User getSender() {
-		return sender;
+	public void setFrom(Date from) {
+		this.from = from;
 	}
 
-	public void setSender(User sender) {
-		this.sender = sender;
+	public Date getTo() {
+		return to;
 	}
 
-	public User getRecipient() {
-		return recipient;
+	public void setTo(Date to) {
+		this.to = to;
 	}
 
-	public void setRecipient(User recipient) {
-		this.recipient = recipient;
+	public String getSchoolName() {
+		return schoolName;
 	}
 
-	public String getText() {
-		return text;
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public String getSpecialization() {
+		return specialization;
 	}
 
-	public Date getCreated() {
-		return created;
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public String getReachedTitle() {
+		return reachedTitle;
+	}
+
+	public void setReachedTitle(String reachedTitle) {
+		this.reachedTitle = reachedTitle;
+	}
+
+	public String getStudyType() {
+		return studyType;
+	}
+
+	public void setStudyType(String studyType) {
+		this.studyType = studyType;
 	}
 
 	/**
-	 * @see java.lang.Object#toString()
+	 * Generated
 	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Message [");
-		if (id != null) {
-			builder.append("id=");
-			builder.append(id);
-			builder.append(", ");
-		}
-		if (sender != null) {
-			builder.append("sender=");
-			builder.append(sender);
-			builder.append(", ");
-		}
-		if (recipient != null) {
-			builder.append("recipient=");
-			builder.append(recipient);
-			builder.append(", ");
-		}
-		if (text != null) {
-			builder.append("text=");
-			builder.append(text);
-			builder.append(", ");
-		}
-		if (created != null) {
-			builder.append("created=");
-			builder.append(created);
-		}
+		builder.append("Study [");
+		builder.append(from);
+		builder.append(", ");
+		builder.append(to);
+		builder.append(", ");
+		builder.append(schoolName);
+		builder.append(", ");
+		builder.append(specialization);
+		builder.append(", ");
+		builder.append(reachedTitle);
+		builder.append(", ");
+		builder.append(studyType);
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

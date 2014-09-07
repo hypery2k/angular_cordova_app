@@ -30,12 +30,92 @@
  */
 package de.mare.mobile.ws;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.websocket.EncodeException;
+import javax.websocket.OnClose;
+import javax.websocket.OnError;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
+
 /**
- * Simple Chart service
+ * Simple Chat service
  * 
  * @author mreinhardt
  * 
  */
+@ServerEndpoint("/message")
 public class MessageService {
+	// Create a Set to hold client sessions
+	private static final Set<Session> clientSessions = Collections
+	    .synchronizedSet(new HashSet<Session>());
 
+	/**
+	 * Add client session to the Set
+	 * 
+	 * @param pSession
+	 */
+	@OnOpen
+	public void onOpen(Session pSession,
+	    @PathParam("userid") String pUserID) {
+		pSession.getUserProperties().put(pUserID, true);
+		clientSessions.add(pSession);
+	}
+
+	/**
+	 * Remove client session from the Set
+	 * 
+	 * @param pSession
+	 */
+	@OnClose
+	public void onClose(Session pSession) {
+		clientSessions.remove(pSession);
+	}
+
+	/**
+	 * Send Text back
+	 * 
+	 * @param message
+	 * @param client
+	 * @throws IOException
+	 * @throws EncodeException
+	 */
+	@OnMessage
+	public void onMessage(String message, Session client) throws IOException,
+	    EncodeException {
+
+		// send data to all connected clients (including caller)
+		for (Session clientSession : clientSessions) {
+			// if (message.equals("Open Sesame")) {
+			//
+			// JsonObjectBuilder builder = Json.createObjectBuilder();
+			// builder.add("person",
+			// Json.createObjectBuilder().add("firstName", "Michael")
+			// .add("lastName", "Jo"));
+			// JsonObject result = builder.build();
+			// // StringWriter sw = new StringWriter();
+			// // try(JsonWriter writer = Json.createWriter(sw))
+			// // {
+			// // writer.writeObject(result);
+			// // }
+			// //
+			// message = result.toString();
+			//
+			// }
+			clientSession.getBasicRemote().sendText(message);
+
+		}
+	}
+
+	@OnError
+	public void onError(Session aclientSession, Throwable aThrowable) {
+		System.out.println("Error : " + aclientSession);
+
+	}
 }

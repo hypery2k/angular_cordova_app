@@ -30,9 +30,11 @@
  */
 package de.mare.mobile.utils;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.core.Response;
+
+import org.glassfish.jersey.client.JerseyClientBuilder;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 /**
  * @author mreinhardt
@@ -40,22 +42,22 @@ import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
  */
 public class RsUtil {
 
-	/**
-	 * 
-	 * @param pUsername
-	 * @param pPassword
-	 * @param pURL
-	 * @return
-	 */
-	public static WebResource getRestRessource(final String pUsername, final String pPassword,
+	public static Response getRestRessource(final String pUsername, final String pPassword,
 	    final String pURL) {
-		Client client = Client.create();
+		final Client client = JerseyClientBuilder.newClient();
 		if (pUsername != null && pPassword != null) {
-			client.addFilter(new HTTPBasicAuthFilter(pUsername, pPassword));
-
+			HttpAuthenticationFeature auth = getAuthFeature(pUsername, pPassword);
+			client.register(auth);
 		}
-		WebResource baseWebRes = client.resource(pURL);
+		Response baseWebRes = client.target(pURL).request().get();
 		return baseWebRes;
+	}
+
+	public static HttpAuthenticationFeature getAuthFeature(final String pUsername,
+	    final String pPassword) {
+		HttpAuthenticationFeature auth = HttpAuthenticationFeature.basicBuilder()
+		    .credentials(pUsername, pPassword).build();
+		return auth;
 	}
 
 }

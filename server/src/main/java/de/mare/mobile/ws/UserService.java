@@ -30,6 +30,7 @@
  */
 package de.mare.mobile.ws;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,7 +52,7 @@ import de.mare.mobile.services.UserRepository;
  * @author mreinhardt
  * 
  */
-@Path("users")
+@Path("user")
 public class UserService {
 
 	@Inject
@@ -67,10 +68,36 @@ public class UserService {
 
 	@GET
 	@Produces("application/json")
+	@Path("test")
+	public Response test() {
+		return Response.status(Status.OK).entity("test").build();
+	}
+
+	@GET
+	@Produces("application/json")
 	@Path("all")
 	public Response all() {
-		List<User> users = userRepository.getAllUsers();
-		return Response.status(Status.OK).entity(users).build();
+		final List<User> users = userRepository.getAllUsers();
+		final List<UserDTO> result = new ArrayList<UserDTO>();
+		for (User user : users) {
+			result.add(new UserDTO(user));
+		}
+		return Response.status(Status.OK).entity(result).build();
+	}
+
+	/**
+	 * @return the userRepository
+	 */
+	public UserRepository getUserRepository() {
+		return userRepository;
+	}
+
+	/**
+	 * @param userRepository
+	 *          the userRepository to set
+	 */
+	public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
 
 }

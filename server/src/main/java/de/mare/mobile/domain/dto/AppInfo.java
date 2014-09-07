@@ -43,6 +43,10 @@ public class AppInfo {
 
 	private String freeMemory;
 
+	public AppInfo() {
+
+	}
+
 	/**
 	 * @return the hostname
 	 */
