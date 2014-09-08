@@ -16,7 +16,7 @@ app.config(function($routeProvider, $locationProvider) {
     }).when('/users', {
       templateUrl: 'views/users.html',
       controller: 'UsersController'
-    }).when('/user/:username', {
+    }).when('/users/:username', {
       templateUrl: 'views/chat.html',
       controller: 'ChatController'      
     }).otherwise({
