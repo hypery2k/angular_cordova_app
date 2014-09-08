@@ -1,8 +1,8 @@
 angular_cordova_app
 ===================
 
-Simple demo app combining a AngularJS with Cordova-based Hybrid Apps with a JAX-RS backend:
-* [app](https://martinreinhardt-online.de/apps/testing/angular-cordova-app/)
+Simple demo app combining a AngularJS with Cordova-based Hybrid Apps with JEE backend, using JAX-RS and WebSockets:
+* [ChatDemoApp](https://martinreinhardt-online.de/apps/stable/ngJEE/)
 
 If you like, you're free to donate:
 
