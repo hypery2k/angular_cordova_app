@@ -11,14 +11,49 @@ app.controller('AppController', function($rootScope, $scope) {
 
 });
 
-app.controller('ChatController', function($rootScope, $scope, $routeParams, UserService, SettingsService) {
-  var username = $routeParams.username,
-    settings = SettingsService.load();
+app.controller('ChatController', function($rootScope, $scope, $routeParams, SettingsService) {
+  var recipient = $routeParams.username,
+    settings = SettingsService.load(),
+    sender = settings.username,
+    connection;
+  var url = 'ws://' + settings.server + '/message/' + sender;
 
   function initChat() {
-    $scope.sender = settings.username;
-    $scope.recipient = username;
+    var self = this;
+    $scope.messages = [];
+    $scope.sender = sender;
+    connection = new WebSocket(url);
+
+    connection.onopen = function() {
+      console.log('Connected to chat service');
+    }
+    connection.onclose = function() {
+      console.log('Connection to chat service closed.');
+    }
+    connection.onerror = function(error) {
+      console.log('Error in chat service' + error);
+    }
+    connection.onmessage = function(event) {
+      var msg = angular.fromJson(event.data);
+      $scope.$apply(function() {
+        $scope.messages.push(msg);
+      });
+    }
   }
+
+  function sendMessage() {
+    var msg = {
+      to: recipient,
+      from: sender,
+      text: $scope.message
+    };
+    connection.send(JSON.stringify(msg));
+    $scope.message = '';
+  }
+
+  // public methods
+  $scope.load = initChat;
+  $scope.send = sendMessage;
 
   // auto init
   initChat();

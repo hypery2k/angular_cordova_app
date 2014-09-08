@@ -15,7 +15,7 @@ app.service('UserService', function($rootScope, $log, $http, $q, SettingsService
         listAllUsers: function() {
             $http({
                 method: 'GET',
-                url: server + '/api/user/all',
+                url: 'http://' + server + '/api/user/all',
                 timeout: timeout,
                 xhrFields: {
                     withCredentials: true
@@ -51,8 +51,9 @@ app.service('SettingsService', function($rootScope, localStorageService) {
             } else {
                 settings = {
                     valid: false,
-                    // default properties
-                    server: 'http://cloud01.martinreinhardt-online.de:8080/cordova-app',
+                    // default properties, use 
+                    //server: 'localhost:8080/cordova-app',
+                    server: 'cloud01.martinreinhardt-online.de:8080/cordova-app',
                     timeout: 2000
                 }
             }

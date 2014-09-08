@@ -88,7 +88,7 @@ app.factory('Base64', function() {
 app.service('LogService', ['$rootScope', '$log',
 
     function($rootScope, $log) {
-    'use strict';
+        'use strict';
         return {
             info: function(pMsg) {
                 console.log(pMsg);
