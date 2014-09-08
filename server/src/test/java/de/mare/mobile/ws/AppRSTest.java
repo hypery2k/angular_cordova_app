@@ -36,6 +36,7 @@ import javax.ws.rs.core.GenericType;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.Test;
 
+import de.mare.mobile.api.rs.AppService;
 import de.mare.mobile.domain.dto.AppInfo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;

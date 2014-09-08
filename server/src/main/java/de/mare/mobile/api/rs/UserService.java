@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: SimpleRS.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: UserService.java, 18.07.2014, 12:49:55, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,51 +28,76 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.ws;
+package de.mare.mobile.api.rs;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
-import de.mare.mobile.domain.dto.AppInfo;
+import de.mare.mobile.domain.User;
+import de.mare.mobile.domain.dto.UserDTO;
+import de.mare.mobile.services.UserRepository;
 
 /**
- * Sample Info REST service, showing system information
+ * Simple user service
  * 
  * @author mreinhardt
  * 
  */
-@Path("app")
-public class AppService {
+@Path("user")
+public class UserService {
 
-	@Path("memory")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response freeMem() {
-		final long memory = Runtime.getRuntime().freeMemory();
+	@Inject
+	private UserRepository userRepository;
 
-		final Response.ResponseBuilder response = Response.status(Response.Status.OK)
-		    .entity(memory);
-		return response.build();
+	@POST
+	@Consumes("application/json")
+	@Path("add")
+	public Response addUser(final UserDTO pUser) {
+		userRepository.addUser(pUser.getUser());
+		return Response.status(Status.OK).build();
 	}
 
-	@Path("info")
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response info() throws UnknownHostException {
-		Response.ResponseBuilder response = null;
-
-		final AppInfo infoObj = new AppInfo();
-		// build up info JSON
-		infoObj.setHostname(InetAddress.getLocalHost().getHostName());
-		infoObj.setFreeMemory(String.valueOf(Runtime.getRuntime().freeMemory()));
-
-		response = Response.status(Response.Status.OK).entity(infoObj);
-		return response.build();
+	@Produces("application/json")
+	@Path("test")
+	public Response test() {
+		return Response.status(Status.OK).entity("test").build();
 	}
+
+	@GET
+	@Produces("application/json")
+	@Path("all")
+	public Response all() {
+		final List<User> users = userRepository.getAllUsers();
+		final List<UserDTO> result = new ArrayList<UserDTO>();
+		for (User user : users) {
+			result.add(new UserDTO(user));
+		}
+		return Response.status(Status.OK).entity(result).build();
+	}
+
+	/**
+	 * @return the userRepository
+	 */
+	public UserRepository getUserRepository() {
+		return userRepository;
+	}
+
+	/**
+	 * @param userRepository
+	 *          the userRepository to set
+	 */
+	public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
 }
