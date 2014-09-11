@@ -1,4 +1,5 @@
 var app = angular.module('angularCordovaApp', [
+  'fsCordova',
   'ngRoute',
   'ngTouch',
   'mobile-angular-ui',
