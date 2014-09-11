@@ -122,9 +122,19 @@ public class MessageService {
 
 	@OnError
 	public void onError(final Session pClientSession, final Throwable pThrowable) {
-		LOG.error("Error on message service: " + pClientSession, pThrowable);
+		String currentRecipient = (String) pClientSession.getUserProperties().get(PROP_USERNAME);
+		LOG.error("Error on message service for user " + currentRecipient, pThrowable);
 	}
 
+	// HELPERS
+
+	/**
+	 * Convert JSON string to a JSON object using standard JEE methods
+	 * 
+	 * @param pJSON
+	 *          JSON string to parse
+	 * @return JSON object
+	 */
 	private JsonObject getJsonFromString(final String pJSON) {
 		Reader sReader = new StringReader(pJSON);
 		JsonReader jReader = Json.createReader(sReader);
