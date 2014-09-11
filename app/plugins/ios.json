@@ -4,8 +4,40 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "framework": {
+                "parents": {
+                    "AudioToolbox.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
-    "installed_plugins": {},
+    "installed_plugins": {
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "de.martinreinhardt-online.de.apps.demo.angularCordova"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "de.martinreinhardt-online.de.apps.demo.angularCordova"
+        }
+    },
     "dependent_plugins": {}
 }
