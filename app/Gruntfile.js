@@ -291,6 +291,23 @@ module.exports = function (grunt) {
           'plato': ['src/scripts/**/*.js', 'test/**/*.js']
         }
       }
+    },
+    cordovacli: {
+        options: {
+            path: 'www'
+        },
+        cordova: {
+            options: {
+                command: ['build'],
+                platforms: ['ios']
+            }
+        },
+        build_ios: {
+            options: {
+                command: 'build',
+                platforms: ['ios']
+            }
+        },
     }
   });
 
