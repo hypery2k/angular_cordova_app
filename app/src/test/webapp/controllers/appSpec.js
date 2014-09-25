@@ -7,22 +7,18 @@ describe('main', function() {
 
   describe("AppController", function() {
 
-    var controller,
-      scope;
+    var appController, scope;
 
-
-    // Initialize the controller 
     beforeEach(inject(function($rootScope, $controller) {
       scope = $rootScope.$new();
-      controller = $controller("AppController", {
+      appController = $controller("AppController", {
         $scope: scope
       });
     }));
 
-    it('Init module failed', function() {
+    it('inject', function() {
       expect(true).toBe(true);
     });
-
 
   });
 });

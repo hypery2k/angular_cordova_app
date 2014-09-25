@@ -25,6 +25,7 @@ module.exports = function(config) {
       '../../main/webapp/scripts/*.js',
       '../../main/webapp/scripts/**/*.js',
       'controllers/*.js',
+      'services/*.js',
     ],
     exclude: ['src/test/javascript/karma.conf*.js'],
     reporters: ['progress'],
