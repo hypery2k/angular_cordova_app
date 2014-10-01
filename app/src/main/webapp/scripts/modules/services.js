@@ -1,3 +1,67 @@
+app.factory('ChatSocket', function(socketFactory, SettingsService) {
+    var settings = SettingsService.load();
+    var url = 'ws://' + settings.server + '/message/' + sender;
+    return socketFactory({
+        url: url
+    });
+})
+
+
+app.service('ChatService', function($rootScope, $log, SettingsService) {
+    "use strict";
+
+    var settings = SettingsService.load(),
+        sender = settings.username,
+        socket, url;
+
+    function createSocket() {
+        url = 'ws://' + settings.server + '/message/' + sender;
+        socket = new ReconnectingWebSocket(url);
+
+        socket.onopen = function() {
+            var args = arguments;
+            if (service.handlers.connected) {
+                $rootScope.$apply(function() {
+                    service.handlers.connected.apply(socket, args)
+                })
+            }
+        }
+
+        socket.onmessage = function(data) {
+            var args = arguments;
+            try {
+                args[0].data = JSON.parse(args[0].data);
+            } catch (e) {
+                // there should be a better way to do this
+                // but it is fast
+            }
+            if (service.handlers.receive) {
+                $rootScope.$apply(function() {
+                    service.handlers.receive.apply(socket, args);
+                })
+            }
+        }
+    }
+
+    var service = {
+        handlers: {},
+        receive: function(callback) {
+            this.handlers.receive = callback;
+        },
+        send: function(data) {
+            var msg = typeof(data) == "object" ? JSON.stringify(data) : data;
+            var status = socket.send(msg);
+        },
+        connected: function(callback) {
+            this.handlers.connected = callback;
+        }
+    };
+    createSocket();
+    return service;
+
+});
+
+
 app.service('UserService', function($rootScope, $log, $http, $q, SettingsService, Base64) {
     "use strict";
 
