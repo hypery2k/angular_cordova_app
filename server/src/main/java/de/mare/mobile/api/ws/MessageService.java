@@ -122,7 +122,7 @@ public class MessageService {
 
 	@OnError
 	public void onError(final Session pClientSession, final Throwable pThrowable) {
-		String currentRecipient = (String) pClientSession.getUserProperties().get(PROP_USERNAME);
+		final String currentRecipient = (String) pClientSession.getUserProperties().get(PROP_USERNAME);
 		LOG.error("Error on message service for user " + currentRecipient, pThrowable);
 	}
 
@@ -136,9 +136,9 @@ public class MessageService {
 	 * @return JSON object
 	 */
 	private JsonObject getJsonFromString(final String pJSON) {
-		Reader sReader = new StringReader(pJSON);
-		JsonReader jReader = Json.createReader(sReader);
-		JsonObject result = jReader.readObject();
+		final Reader sReader = new StringReader(pJSON);
+		final JsonReader jReader = Json.createReader(sReader);
+		final JsonObject result = jReader.readObject();
 		jReader.close();
 		try {
 			sReader.close();
