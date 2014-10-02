@@ -3,8 +3,8 @@
 </div>
 <div class="scrollable">
   <div class="scrollable-content"> 
-    <div class="list-group">        
-        <div ng-if="!users" class="list-group-item">No users found.</div>
+    <div id="userErrorMsg" ng-if="!users" class="list-group-item">No users found.</div>
+    <div id="userListing" class="list-group">        
         <a ng-repeat="user in users" href="#/users/{{user.username}}" class="list-group-item media">
           <div class="pull-left">
             <i class="fa fa-user chat-user-avatar"></i>

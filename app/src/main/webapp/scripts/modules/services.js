@@ -116,8 +116,8 @@ app.service('SettingsService', function($rootScope, localStorageService) {
                 settings = {
                     valid: false,
                     // default properties, use 
-                    //server: 'localhost:8080/cordova-app',
-                    server: 'cloud01.martinreinhardt-online.de:8080/cordova-app',
+                    server: 'localhost:8080/cordova-app',
+                    //server: 'cloud01.martinreinhardt-online.de:8080/cordova-app',
                     timeout: 2000
                 }
             }
