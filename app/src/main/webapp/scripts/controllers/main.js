@@ -1,21 +1,3 @@
-app.controller('AppController', function($rootScope, $scope, CordovaService) {
-
-  CordovaService.ready.then(function() {
-    // Cordova is ready
-    $rootScope.loading = false;
-
-    $rootScope.$on("$routeChangeStart", function() {
-      $rootScope.loading = true;
-    });
-
-    $rootScope.$on("$routeChangeSuccess", function() {
-      $rootScope.loading = false;
-    });
-
-  });
-
-});
-
 app.controller('ChatController', function($rootScope, $scope, $routeParams, SettingsService, ChatService) {
   var recipient = $routeParams.username,
     settings = SettingsService.load(),

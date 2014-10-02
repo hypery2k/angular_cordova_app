@@ -41,4 +41,9 @@ public class AppConstants {
 
 	public final static String PU_NAME = "chatPU";
 
+	// key to app config 
+	public final static String APP_CFGPARAM = "appConfig";
+	// default config
+	public final static String APP_CFG_DEFAULT = "{\"rsBackend\":\"http://localhost:8080/cordova-server-backend/api\",\"wsBackend\":\"ws://localhost:8080/cordova-server-backend/message\"}";
+
 }

@@ -30,14 +30,12 @@
  */
 package de.mare.mobile.ws;
 
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.GenericType;
 
-import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.Test;
 
 import de.mare.mobile.api.rs.AppService;
-import de.mare.mobile.domain.dto.AppInfo;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -47,11 +45,14 @@ import static org.hamcrest.core.IsNull.notNullValue;
  * @author mreinhardt
  * 
  */
-public class AppRSTest extends RsTest {
+public class AppRSTest extends RsTest<AppService> {
 
+	/**
+	 * @see de.mare.mobile.ws.RsTest#getTestResource()
+	 */
 	@Override
-	protected Application configure() {
-		return new ResourceConfig(AppService.class);
+	public Class<AppService> getTestResource() {
+		return AppService.class;
 	}
 
 	@Test
@@ -65,8 +66,8 @@ public class AppRSTest extends RsTest {
 
 	@Test
 	public void testInfo() {
-		final AppInfo infoDtls = target("app/info").request().get(
-		    new GenericType<AppInfo>() {
+		final String infoDtls = target("app/config").request().get(
+		    new GenericType<String>() {
 		    });
 		assertThat(infoDtls, notNullValue());
 		LOG.debug("Result for memory info " + infoDtls);

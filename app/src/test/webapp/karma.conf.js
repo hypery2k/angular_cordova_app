@@ -22,6 +22,7 @@ module.exports = function(config) {
       '../../../bower_components/angular-local-storage/angular-local-storage.js',
       '../../../bower_components/angular-bootstrap/ui-bootstrap.js',
       '../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      '../../../bower_components/angular-deferred-bootstrap/angular-deferred-bootstrap.js',
       '../../main/webapp/scripts/*.js',
       '../../main/webapp/scripts/**/*.js',
       'controllers/*.js',

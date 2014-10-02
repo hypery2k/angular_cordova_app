@@ -32,10 +32,15 @@ package de.mare.mobile.ws;
 
 import java.util.UUID;
 
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.ws.rs.core.Application;
 
+import org.glassfish.hk2.api.Factory;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.After;
 import org.junit.Before;
@@ -45,9 +50,11 @@ import org.slf4j.LoggerFactory;
 
 import de.mare.mobile.domain.User;
 import de.mare.mobile.domain.enums.SecurityRole;
+import de.mare.mobile.services.ConfigRepository;
 import de.mare.mobile.utils.EmHelper;
-import static org.hamcrest.MatcherAssert.assertThat;
+import de.mare.mobile.utils.MockUtil;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 
@@ -55,7 +62,7 @@ import static org.hamcrest.Matchers.is;
  * @author mreinhardt
  *
  */
-public abstract class RsTest extends JerseyTest {
+public abstract class RsTest<T> extends JerseyTest {
 	/**
 	 * Logger
 	 */
@@ -90,6 +97,8 @@ public abstract class RsTest extends JerseyTest {
 		em = emf.createEntityManager();
 	}
 
+	public abstract Class<T> getTestResource();
+
 	@After
 	public void after() {
 
@@ -108,5 +117,58 @@ public abstract class RsTest extends JerseyTest {
 	 */
 	public void setValidTestuser(User validTestuser) {
 		this.validTestuser = validTestuser;
+	}
+
+	/**
+	 * Register the Resource and TestBinder in the Application
+	 */
+
+	@Override
+	protected Application configure() {
+		return new ResourceConfig() {
+			{
+				register(new TestBinder());
+				register(getTestResource());
+			}
+		};
+	}
+
+	/**
+	 * This class will help Resource to set the @Inject fields.
+	 */
+	public static class TestBinder extends AbstractBinder {
+
+		@Override
+		protected void configure() {
+			bindFactory(ConfigRepositoryProvider.class).to(ConfigRepository.class);
+		}
+
+	}
+
+	@RequestScoped
+	public static class ConfigRepositoryProvider implements Factory<ConfigRepository> {
+
+		/**
+		 * @see org.glassfish.hk2.api.Factory#dispose(java.lang.Object)
+		 */
+		@Override
+		public void dispose(ConfigRepository arg0) {
+
+		}
+
+		/**
+		 * @see org.glassfish.hk2.api.Factory#provide()
+		 */
+		@Override
+		public ConfigRepository provide() {
+			try {
+				ConfigRepository instance = ConfigRepository.class.newInstance();
+				MockUtil.setFieldStatic(instance, "entityManager", em);
+				return instance;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+
 	}
 }

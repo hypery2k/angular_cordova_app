@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: AppInfo.java, 04.08.2014, 16:07:28, mreinhardt
+ * File: ConfigRepository.java, 02.10.2014, 14:01:42, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,53 +28,48 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.domain.dto;
+package de.mare.mobile.services;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.annotation.security.PermitAll;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.mare.mobile.domain.ConfigParameter;
+import de.mare.mobile.utils.AppConstants;
 
 /**
  * @author mreinhardt
  *
  */
-@XmlRootElement
-public class AppInfo {
+@Stateless
+@PermitAll
+public class ConfigRepository {
+	private Logger LOG = LoggerFactory.getLogger(ConfigRepository.class);
 
-	private String hostname;
+	@Inject
+	private EntityManager entityManager;
 
-	private String freeMemory;
-
-	public AppInfo() {
-
-	}
-
-	/**
-	 * @return the hostname
-	 */
-	public String getHostname() {
-		return hostname;
-	}
-
-	/**
-	 * @param hostname
-	 *          the hostname to set
-	 */
-	public void setHostname(String hostname) {
-		this.hostname = hostname;
-	}
-
-	/**
-	 * @return the freeMemory
-	 */
-	public String getFreeMemory() {
-		return freeMemory;
-	}
-
-	/**
-	 * @param freeMemory
-	 *          the freeMemory to set
-	 */
-	public void setFreeMemory(String freeMemory) {
-		this.freeMemory = freeMemory;
+	public ConfigParameter getAppConfig() {
+		final TypedQuery<ConfigParameter> query = entityManager.createNamedQuery(
+		    ConfigParameter.NAMED_QUERY_FIND_BY_KEY, ConfigParameter.class);
+		query
+		    .setParameter(ConfigParameter.NAMED_QUERY_FIND_BY_KEY_PARAM_KEY, AppConstants.APP_CFGPARAM);
+		ConfigParameter appConfig = null;
+		try {
+			appConfig = query.getResultList().get(0);
+		} catch (final Exception e) {
+			LOG.error("error during search for app config. Using default.", e);
+			appConfig = new ConfigParameter();
+			appConfig.setKey(AppConstants.APP_CFGPARAM);
+			appConfig.setValue(AppConstants.APP_CFG_DEFAULT);
+			entityManager.persist(appConfig);
+		}
+		return appConfig;
 	}
 
 }

@@ -37,17 +37,18 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.mare.mobile.domain.dto.AppInfo;
 import de.mare.mobile.utils.RsUtil;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 /**
  * @author mreinhardt
  * 
  */
-public class AppRSIT extends RsTest {
+public class AppRSIT {
 	/**
 	 * Logger
 	 */
@@ -56,7 +57,7 @@ public class AppRSIT extends RsTest {
 	@Test
 	public void testMemoryInfo() {
 		final Response webRes = RsUtil.getRestRessource("user1",
-		    "user1", "http://localhost:8080/cordova-app/api/app/memory");
+		    "user1", "http://localhost:8080/cordova-server-backend/api/app/memory");
 		final String memInfo = webRes.readEntity(new GenericType<String>() {
 		});
 		assertThat(memInfo, notNullValue());
@@ -67,8 +68,8 @@ public class AppRSIT extends RsTest {
 	@Test
 	public void testInfo() {
 		final Response webRes = RsUtil.getRestRessource("user1",
-		    "user1", "http://localhost:8080/cordova-app/api/app/info");
-		final AppInfo infoDtls = webRes.readEntity(new GenericType<AppInfo>() {
+		    "user1", "http://localhost:8080/cordova-server-backend/api/app/config");
+		final String infoDtls = webRes.readEntity(new GenericType<String>() {
 		});
 		assertThat(infoDtls, notNullValue());
 		LOG.debug("Result for memory info " + infoDtls);

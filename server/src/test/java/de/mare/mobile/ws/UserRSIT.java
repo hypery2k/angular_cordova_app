@@ -39,9 +39,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.mare.mobile.domain.User;
 import de.mare.mobile.domain.dto.UserDTO;
 import de.mare.mobile.utils.RsUtil;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -49,7 +49,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
  * @author mreinhardt
  * 
  */
-public class UserRSIT extends RsTest {
+public class UserRSIT {
 	/**
 	 * Logger
 	 */

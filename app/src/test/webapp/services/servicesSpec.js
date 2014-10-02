@@ -4,7 +4,7 @@ describe('Service', function() {
 
   // load the controller's module
   beforeEach(module('angularCordovaApp'));
-
+  
   describe('UserService', function() {
 
     var mockedSettingsService, httpBackend, userService, settings, rootScope;
@@ -12,11 +12,12 @@ describe('Service', function() {
     // Initialize the controller and a settings mock
     beforeEach(function() {
       module(function($provide) {
+  	    $provide.constant('APP_CONFIG', { config:'http://localhost:8080/cordova-server-backend/api/app/config' });
         settings = {
           username: 'user',
           password: 'user',
           valid: true,
-          server: 'localhost/cordova-app',
+          rsBackend: 'http://localhost/cordova-app/api',
           timeout: 2000
         };
         mockedSettingsService = {

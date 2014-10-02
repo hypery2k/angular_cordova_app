@@ -15,7 +15,7 @@ app.service('ChatService', function($rootScope, $log, SettingsService) {
         socket, url;
 
     function createSocket() {
-        url = 'ws://' + settings.server + '/message/' + sender;
+        url = settings.wsBackend + '/' + sender;
         socket = new ReconnectingWebSocket(url);
 
         socket.onopen = function() {
@@ -68,7 +68,7 @@ app.service('UserService', function($rootScope, $log, $http, $q, SettingsService
     var settings = SettingsService.load();
     var basicAuth = Base64.encode(settings.username + ":" + settings.password),
         deferred = $q.defer(),
-        server = settings.server,
+        server = settings.rsBackend,
         timeout = settings.timeout,
         httpHeader = {
             'Authorization': 'Basic ' + basicAuth,
@@ -79,7 +79,7 @@ app.service('UserService', function($rootScope, $log, $http, $q, SettingsService
         listAllUsers: function() {
             $http({
                 method: 'GET',
-                url: 'http://' + server + '/api/user/all',
+                url: server + '/user/all',
                 timeout: timeout,
                 xhrFields: {
                     withCredentials: true
@@ -99,28 +99,49 @@ app.service('UserService', function($rootScope, $log, $http, $q, SettingsService
     }
 });
 
-app.service('SettingsService', function($rootScope, localStorageService) {
+app.service('SettingsService', function($rootScope, $http, APP_CONFIG, Base64, localStorageService) {
     "use strict";
+    var configURL=APP_CONFIG.config;
     return {
         save: function(config) {
-            config.valid = true;
             localStorageService.remove('ngJEE_app.settings');
-            localStorageService.add('ngJEE_app.settings', config);
+            if(config.username && config.password){
+                var basicAuth = Base64.encode(config.username + ":" + config.password),
+                timeout = settings.timeout,
+                httpHeader = {
+                    'Authorization': 'Basic ' + basicAuth,
+                    'Access-Control-Allow-Origin': 'localhost',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                };
+                $http({
+                    method: 'GET',
+                    url: configURL,
+                    timeout: 2000,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    headers: httpHeader
+                }).then(function(response) {            	
+                	angular.forEach(response.data, function(value, key) {
+                		config[key] = value;
+                	});
+                	config.valid=true;
+                	config.timeout=2000;
+                    localStorageService.add('ngJEE_app.settings', config);
+                }, function (error) {
+                	config = {
+                            valid: false,
+                	}
+                });}
         },
         load: function() {
             console.log("Loading settings from local storage");
             var settings = localStorageService.get('ngJEE_app.settings');
-            if (settings) {
-                settings.valid = true;
-            } else {
-                settings = {
-                    valid: false,
-                    // default properties, use 
-                    server: 'localhost:8080/cordova-app',
-                    //server: 'cloud01.martinreinhardt-online.de:8080/cordova-app',
-                    timeout: 2000
-                }
-            }
+            if(settings){
+                 if(settings.valid){
+                    console.log("Found valid settings");
+                } 
+            } 
             return settings;
         }
     };

@@ -3,7 +3,7 @@ var app = angular.module('angularCordovaApp', [
   'ngRoute',
   'ngTouch',
   'mobile-angular-ui',
-  'LocalStorageModule',
+  'LocalStorageModule'
 ]);
 
 app.config(function($routeProvider, $locationProvider) {
@@ -24,3 +24,32 @@ app.config(function($routeProvider, $locationProvider) {
       redirectTo: '/home'
     });
 });
+
+deferredBootstrapper.bootstrap({
+	  element: document.body,
+	  module: 'angularCordovaApp',
+	  resolve: {
+	    APP_CONFIG: ['$http', function ($http) {
+	      return $http.get('/config.json');
+	    }]
+	  }
+	});
+
+app.controller('AppController', function($rootScope, $scope, CordovaService) {
+    $rootScope.loading = true;
+
+	  CordovaService.ready.then(function() {
+	    // Cordova is ready
+	    $rootScope.loading = false;
+
+	    $rootScope.$on("$routeChangeStart", function() {
+	      $rootScope.loading = true;
+	    });
+
+	    $rootScope.$on("$routeChangeSuccess", function() {
+	      $rootScope.loading = false;
+	    });
+
+	  });
+
+	});

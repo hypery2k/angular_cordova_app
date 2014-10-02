@@ -9,6 +9,7 @@
   <class>de.mare.mobile.domain.Message</class>
   <class>de.mare.mobile.domain.MultilingualString</class>
   <class>de.mare.mobile.domain.User</class>
+  <class>de.mare.mobile.domain.ConfigParameter</class>
   <class>de.mare.mobile.domain.cv.AcademicWork</class>
   <class>de.mare.mobile.domain.cv.Address</class>
   <class>de.mare.mobile.domain.cv.CV</class>

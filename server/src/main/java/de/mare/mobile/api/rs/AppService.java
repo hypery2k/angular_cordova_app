@@ -30,16 +30,16 @@
  */
 package de.mare.mobile.api.rs;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import de.mare.mobile.domain.dto.AppInfo;
+import de.mare.mobile.services.ConfigRepository;
 
 /**
  * Sample Info REST service, showing system information
@@ -50,29 +50,26 @@ import de.mare.mobile.domain.dto.AppInfo;
 @Path("app")
 public class AppService {
 
+	@Inject
+	private ConfigRepository configRepository;
+
 	@Path("memory")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response freeMem() {
 		final long memory = Runtime.getRuntime().freeMemory();
-
 		final Response.ResponseBuilder response = Response.status(Response.Status.OK)
 		    .entity(memory);
 		return response.build();
 	}
 
-	@Path("info")
+	@Path("config")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response info() throws UnknownHostException {
+	public Response getAppConfig() throws UnknownHostException {
 		Response.ResponseBuilder response = null;
-
-		final AppInfo infoObj = new AppInfo();
-		// build up info JSON
-		infoObj.setHostname(InetAddress.getLocalHost().getHostName());
-		infoObj.setFreeMemory(String.valueOf(Runtime.getRuntime().freeMemory()));
-
-		response = Response.status(Response.Status.OK).entity(infoObj);
+		String config = configRepository.getAppConfig().getValue();
+		response = Response.status(Response.Status.OK).entity(config);
 		return response.build();
 	}
 }
