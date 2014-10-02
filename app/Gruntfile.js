@@ -338,6 +338,11 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
+  grunt.registerTask('build-cordova', [
+    'release',
+    'cordovacli'
+  ]);
+
   grunt.registerTask('release', [
     'clean:dist',
     'useminPrepare',
