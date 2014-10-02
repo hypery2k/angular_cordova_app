@@ -12,7 +12,6 @@
     <artifactId>cordova-app</artifactId>
     <name>cordova-app</name>
     <description>MobileApp based on Cordova and AngularJS</description>
-    <packaging>war</packaging>
 
     <build>
         <plugins>
