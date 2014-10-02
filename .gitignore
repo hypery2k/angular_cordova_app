@@ -32,3 +32,11 @@ app/.project
 server/mem.h2.db
 server/logs/*
 target/*
+
+webtest/target/*
+
+webtest/.classpath
+
+webtest/.project
+
+app/.project

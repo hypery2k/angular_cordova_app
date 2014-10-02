@@ -5,11 +5,11 @@
 
     <parent>
         <groupId>de.mare.mobile</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>cordova-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>app</artifactId>
+    <artifactId>cordova-app</artifactId>
     <name>cordova-app</name>
     <description>MobileApp based on Cordova and AngularJS</description>
     <packaging>war</packaging>
