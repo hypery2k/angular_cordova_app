@@ -10,7 +10,8 @@ app.controller('ChatController', function($rootScope, $scope, $routeParams, Sett
     $scope.messages = [];
     $scope.sender = sender;
     $scope.recipient = recipient;
-    ChatService.receive(function() {
+    ChatService.open();
+    ChatService.receive(function(event) {
       $rootScope.loading = true;
       var msg = angular.fromJson(event.data);
       $scope.messages.push(msg);
@@ -54,28 +55,46 @@ app.controller('UsersController', function($rootScope, $scope, UserService) {
     );
   }
 
+  // public methods
+  $scope.allUsers = loadUsers;
+
   // auto init
   loadUsers();
 
 });
 
 app.controller('NavigationController', function($rootScope, $scope, SettingsService) {
-  $scope.settings = SettingsService.load();
+  function init() {
+    $scope.settings = SettingsService.load();
+    $scope.$on('handleConfigUpdate', function(event, settings) {
+      $scope.settings = settings;
+      console.log("Reloading nav settings");
+    });
+  }
+  // public methods
+  $scope.init = init;
+
+  // auto init
+  init();
+
 });
 
-app.controller('SettingsController', function($rootScope, $scope, $location, SettingsService) {
+app.controller('SettingsController', function($rootScope, $scope, $location, $route, SettingsService, ConfigService) {
   "use strict";
-
 
   function loadSettings() {
     $scope.settings = SettingsService.load();
   }
 
   function saveSettings() {
-    SettingsService.save($scope.settings);
-    // redirect
-    $location.path("/");
-    window.location.reload();
+    SettingsService.save($scope.settings).then(function() {
+      $rootScope.$broadcast('handleConfigUpdate', $scope.settings);
+      // redirect
+      $location.path("/").replace();
+      $route.reload();
+      // update config
+      ConfigService.configureServices();
+    });
   }
 
   // public methods

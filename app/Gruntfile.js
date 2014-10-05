@@ -193,14 +193,15 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '.',
+          cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            '<%= yeoman.app %>/*.{ico,png,txt}',
-            '<%= yeoman.app %>/.htaccess',
-            '<%= yeoman.app %>/images/{,*/}*.{gif,webp}',
-            '<%= yeoman.app %>/styles/fonts/*',
-            '<%= yeoman.app %>/*.js'
+            '*.{ico,png,txt}',
+            '.htaccess',
+            'config.json',
+            'images/{,*/}*.{gif,webp}',
+            'styles/fonts/*',
+            '*.js'
           ]
         }, {
           expand: true,
@@ -276,6 +277,15 @@ module.exports = function (grunt) {
         }]
       }
     },
+    uglify: {
+        dist: {
+          files: {
+            '<%= yeoman.dist %>/scripts/application.js': [
+              '<%= yeoman.dist %>/scripts/application.js'
+            ]
+          }
+        }
+      },
     plato: {
       report: {
         files: {
@@ -325,15 +335,18 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'clean:dist',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'copy:dist',
-    'cdnify',
-    'ngmin',
-    'rev',
-    'usemin'
+   'clean:dist',
+   'useminPrepare',
+   'concurrent:dist',
+   'autoprefixer',
+   'concat',
+   'copy:dist',
+   'cdnify',
+   'ngmin',
+   'cssmin',
+   'uglify',
+   'rev',
+   'usemin'
   ]);
 
   grunt.registerTask('build-cordova', [
@@ -342,15 +355,18 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('release', [
-    'clean:dist',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'copy:dist',
-    'cdnify',
-    'ngmin',
-    'rev',
-    'usemin'
+     'clean:dist',
+     'useminPrepare',
+     'concurrent:dist',
+     'autoprefixer',
+     'concat',
+     'copy:dist',
+     'cdnify',
+     'ngmin',
+     'cssmin',
+     'uglify',
+     'rev',
+     'usemin'
   ]);
 
   grunt.registerTask('default', [
