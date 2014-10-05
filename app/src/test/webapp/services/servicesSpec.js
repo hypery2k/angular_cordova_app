@@ -29,6 +29,7 @@ describe('Service', function() {
       })
       inject(function($injector) {
         userService = $injector.get('UserService');
+        userService.config(settings);
         httpBackend = $injector.get('$httpBackend');
         rootScope = $injector.get('$rootScope');
         var userList = [{
@@ -59,7 +60,7 @@ describe('Service', function() {
         userList = response.data;
         expect(userList.length).toEqual(2);
       }, function(response) {
-        fail('There should be no errors')
+        fail('There should be no errors');
       });
       rootScope.$apply();
       httpBackend.flush();
