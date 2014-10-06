@@ -51,6 +51,10 @@ app.controller('UsersController', function($rootScope, $scope, UserService) {
       function(response) {
         $scope.users = response.data;
         $rootScope.loading = false;
+      },function(errorResponse){
+    	console.error('Server error during reading users');
+		navigator.notification.alert('Server did not show valid response.',null,'Server Error');
+        $rootScope.loading = false;
       }
     );
   }
