@@ -61,6 +61,7 @@
         <!-- Note 2.8+ does not work with AspectJ aspect path -->
         <maven-eclipse-plugin.version>2.7</maven-eclipse-plugin.version>
         <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
+        <maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
         <maven-surefire-plugin.version>2.16</maven-surefire-plugin.version>
         <maven-site-plugin.version>3.3</maven-site-plugin.version>
         <maven-pdf-plugin.version>1.2</maven-pdf-plugin.version>
