@@ -1,20 +1,20 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
   grunt.loadNpmTasks('grunt-bower-task');
 
   grunt.initConfig({
-	bower: {
-	    install: {
-	       //just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
+    bower: {
+      install: {
+        //just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
 
-	        options: {
-	        	copy: false,
-	        }
-	    }
-	  },
+        options: {
+          copy: false,
+        }
+      }
+    },
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'src/main/webapp',
@@ -177,8 +177,7 @@ module.exports = function (grunt) {
     },
     htmlmin: {
       dist: {
-        options: {
-        },
+        options: {},
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
@@ -216,20 +215,20 @@ module.exports = function (grunt) {
           src: [
             'generated/*'
           ]
-        },{
-            expand: true,
-            cwd: 'bower_components/mobile-angular-ui/dist/fonts/',
-            dest: '<%= yeoman.dist %>/fonts',
-            src: [
-                '*'
-            ]
-        },{
-            expand: true,
-            cwd: 'bower_components/bootstrap-sass/fonts/',
-            dest: '<%= yeoman.dist %>/fonts',
-            src: [
-                '*'
-            ]
+        }, {
+          expand: true,
+          cwd: 'bower_components/mobile-angular-ui/dist/fonts/',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: [
+            '*'
+          ]
+        }, {
+          expand: true,
+          cwd: 'bower_components/bootstrap-sass/fonts/',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: [
+            '*'
+          ]
         }]
       },
       styles: {
@@ -278,14 +277,14 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
-        dist: {
-          files: {
-            '<%= yeoman.dist %>/scripts/application.js': [
-              '<%= yeoman.dist %>/scripts/application.js'
-            ]
-          }
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/scripts/application.js': [
+            '<%= yeoman.dist %>/scripts/application.js'
+          ]
         }
-      },
+      }
+    },
     plato: {
       report: {
         files: {
@@ -294,25 +293,25 @@ module.exports = function (grunt) {
       }
     },
     cordovacli: {
+      options: {
+        path: 'www'
+      },
+      cordova: {
         options: {
-            path: 'www'
-        },
-        cordova: {
-            options: {
-                command: ['build'],
-                platforms: ['ios']
-            }
-        },
-        build_ios: {
-            options: {
-                command: 'build',
-                platforms: ['ios']
-            }
-        },
+          command: ['build'],
+          platforms: ['ios']
+        }
+      },
+      build_ios: {
+        options: {
+          command: 'build',
+          platforms: ['ios']
+        }
+      },
     }
   });
 
-  grunt.registerTask('server', function (target) {
+  grunt.registerTask('server', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -335,18 +334,17 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-   'clean:dist',
-   'useminPrepare',
-   'concurrent:dist',
-   'autoprefixer',
-   'concat',
-   'copy:dist',
-   'cdnify',
-   'ngmin',
-   'cssmin',
-   'uglify',
-   'rev',
-   'usemin'
+    'clean:dist',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'copy:dist',
+    'cdnify',
+    'ngmin',
+    'cssmin',
+    'rev',
+    'usemin'
   ]);
 
   grunt.registerTask('build-cordova', [
@@ -355,18 +353,18 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('release', [
-     'clean:dist',
-     'useminPrepare',
-     'concurrent:dist',
-     'autoprefixer',
-     'concat',
-     'copy:dist',
-     'cdnify',
-     'ngmin',
-     'cssmin',
-     'uglify',
-     'rev',
-     'usemin'
+    'clean:dist',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'copy:dist',
+    'cdnify',
+    'ngmin',
+    'cssmin',
+    'uglify',
+    'rev',
+    'usemin'
   ]);
 
   grunt.registerTask('default', [
