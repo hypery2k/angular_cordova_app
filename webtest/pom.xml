@@ -31,10 +31,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <systemPropertyVariables>
-                        <webdriver.driver>${webdriver.driver}</webdriver.driver>
-                        <thucydides.issue.tracker.url>https://github.com/hypery2k/angular_cordova_app/issues/{0}</thucydides.issue.tracker.url>
-                    </systemPropertyVariables>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>

@@ -9,11 +9,10 @@ import net.thucydides.core.annotations.findby.FindBy;
 import net.thucydides.core.pages.PageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
-import static ch.lambdaj.Lambda.convert;
 import ch.lambdaj.function.convert.Converter;
+import static ch.lambdaj.Lambda.convert;
 
 /**
  * @author mreinhardt
@@ -34,7 +33,7 @@ public class Users extends PageObject {
 			if (element(errorMsg).isVisible()) {
 				errMsgVisible = true;
 			}
-		} catch (TimeoutException e) {
+		} catch (Exception e) {
 		}
 		return errMsgVisible;
 	}

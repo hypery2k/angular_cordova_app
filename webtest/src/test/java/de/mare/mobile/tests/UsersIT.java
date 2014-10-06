@@ -9,12 +9,10 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.pages.Pages;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.html5.WebStorage;
 
 import de.mare.mobile.steps.AppSteps;
 
@@ -62,7 +60,6 @@ public class UsersIT {
 			appSteps.goToSettings();
 			appSteps.saveSettings();
 		} catch (Exception e) {
-			 e.printStackTrace();
 		}
 	}
 
