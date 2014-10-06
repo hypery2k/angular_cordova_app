@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import net.thucydides.core.pages.PageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
 import static ch.lambdaj.Lambda.convert;
@@ -27,10 +28,13 @@ public class Users extends PageObject {
 	private WebElement userListings;
 
 	public boolean isErrorMsgVisible() {
-		element(userListings).waitUntilVisible();
 		boolean errMsgVisible = false;
-		if (element(userListings).isVisible()) {
-			errMsgVisible = true;
+		try {
+			element(errorMsg).waitUntilVisible();
+			if (element(errorMsg).isVisible()) {
+				errMsgVisible = true;
+			}
+		} catch (TimeoutException e) {
 		}
 		return errMsgVisible;
 	}
