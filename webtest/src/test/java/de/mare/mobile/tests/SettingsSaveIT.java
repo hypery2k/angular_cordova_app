@@ -3,6 +3,7 @@
  */
 package de.mare.mobile.tests;
 
+import net.thucydides.core.annotations.Issues;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
 import net.thucydides.core.annotations.Steps;
@@ -32,11 +33,13 @@ public class SettingsSaveIT {
 	public AppSteps appSteps;
 
 	@Test
+	@Issues({ "#5" })
 	public void showSettings() {
 		appSteps.goToSettings();
 	}
 
 	@Test
+	@Issues({ "#5", "#6" })
 	public void userListingWithoutErrors() {
 		appSteps.goToSettings();
 		appSteps.saveNewSettings("user1", "user1");
@@ -45,6 +48,7 @@ public class SettingsSaveIT {
 	}
 
 	@Test
+	@Issues({ "#5", "#6" })
 	public void shouldShowAllUsers() {
 		appSteps.goToSettings();
 		appSteps.saveNewSettings("user1", "user1");

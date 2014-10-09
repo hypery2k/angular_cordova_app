@@ -3,6 +3,7 @@
  */
 package de.mare.mobile.tests;
 
+import net.thucydides.core.annotations.Issues;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
 import net.thucydides.core.annotations.Steps;
@@ -36,6 +37,7 @@ public class UsersIT {
 	public final static String LS_APP_SETTINGS_VALUE = "{\"username\":\"user1\",\"password\":\"user1\"}";
 
 	@Test
+	@Issues({ "#5", "#6" })
 	public void userListingWithoutErrors() {
 		setupLS();
 		appSteps.goToUserListing();
@@ -43,6 +45,7 @@ public class UsersIT {
 	}
 
 	@Test
+	@Issues({ "#5", "#6" })
 	public void shouldShowAllUsers() {
 		setupLS();
 		appSteps.goToUserListing();
