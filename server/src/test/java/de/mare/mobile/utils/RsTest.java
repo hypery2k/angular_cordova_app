@@ -28,7 +28,7 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.ws;
+package de.mare.mobile.utils;
 
 import java.util.UUID;
 
@@ -51,9 +51,6 @@ import org.slf4j.LoggerFactory;
 import de.mare.mobile.domain.User;
 import de.mare.mobile.domain.enums.SecurityRole;
 import de.mare.mobile.services.ConfigRepository;
-import de.mare.mobile.utils.EmHelper;
-import de.mare.mobile.utils.MockUtil;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;

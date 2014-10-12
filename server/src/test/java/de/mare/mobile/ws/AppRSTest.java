@@ -35,7 +35,7 @@ import javax.ws.rs.core.GenericType;
 import org.junit.Test;
 
 import de.mare.mobile.api.rs.AppService;
-
+import de.mare.mobile.utils.RsTest;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -48,7 +48,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 public class AppRSTest extends RsTest<AppService> {
 
 	/**
-	 * @see de.mare.mobile.ws.RsTest#getTestResource()
+	 * @see de.mare.mobile.utils.RsTest#getTestResource()
 	 */
 	@Override
 	public Class<AppService> getTestResource() {

@@ -40,16 +40,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.mare.mobile.domain.dto.UserDTO;
+import de.mare.mobile.utils.RsBaseIT;
 import de.mare.mobile.utils.RsUtil;
-
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 /**
  * @author mreinhardt
  * 
  */
-public class UserRSIT {
+public class UserRSIT extends RsBaseIT {
 	/**
 	 * Logger
 	 */
@@ -57,12 +58,11 @@ public class UserRSIT {
 
 	@Test
 	public void shouldListAllUsers() {
-		final Response webRes = RsUtil.getRestRessource("user1",
-		    "user1", "http://localhost:8080/cordova-app/api/user/all");
-		final List<UserDTO> memInfo = webRes.readEntity(new GenericType<List<UserDTO>>() {
-		});
-		assertThat(memInfo, notNullValue());
-		LOG.debug("Result for user listing " + memInfo);
+		final Response webRes = RsUtil.getRestRessource("user1", "user1", getRESTfullURI("/user/all"));
+		final List<UserDTO> usersInfo = webRes.readEntity(new GenericType<List<UserDTO>>() {});
+		assertThat(webRes.getStatus(), is(200));
+		assertThat(usersInfo, notNullValue());
+		LOG.debug("Result for user listing " + usersInfo);
 	}
 
 }

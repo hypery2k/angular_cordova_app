@@ -30,6 +30,11 @@
  */
 package de.mare.mobile.ws;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsNull.notNullValue;
+
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
@@ -37,18 +42,15 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.mare.mobile.utils.RsBaseIT;
 import de.mare.mobile.utils.RsUtil;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.IsNull.notNullValue;
 
 /**
  * @author mreinhardt
  * 
  */
-public class AppRSIT {
+public class AppRSIT extends RsBaseIT {
+
 	/**
 	 * Logger
 	 */
@@ -56,10 +58,9 @@ public class AppRSIT {
 
 	@Test
 	public void testMemoryInfo() {
-		final Response webRes = RsUtil.getRestRessource("user1",
-		    "user1", "http://localhost:8080/cordova-server-backend/api/app/memory");
-		final String memInfo = webRes.readEntity(new GenericType<String>() {
-		});
+		final Response webRes = RsUtil.getRestRessource("user1", "user1", getRESTfullURI("/app/memory"));
+		final String memInfo = webRes.readEntity(new GenericType<String>() {});
+		assertThat(webRes.getStatus(), is(200));
 		assertThat(memInfo, notNullValue());
 		assertThat(new Long(memInfo), is(greaterThan(0l)));
 		LOG.debug("Result for memory info " + memInfo);
@@ -67,10 +68,10 @@ public class AppRSIT {
 
 	@Test
 	public void testInfo() {
-		final Response webRes = RsUtil.getRestRessource("user1",
-		    "user1", "http://localhost:8080/cordova-server-backend/api/app/config");
-		final String infoDtls = webRes.readEntity(new GenericType<String>() {
-		});
+		final Response webRes = RsUtil.getRestRessource("user1", "user1",
+				getRESTfullURI("/app/config"));
+		final String infoDtls = webRes.readEntity(new GenericType<String>() {});
+		assertThat(webRes.getStatus(), is(200));
 		assertThat(infoDtls, notNullValue());
 		LOG.debug("Result for memory info " + infoDtls);
 
