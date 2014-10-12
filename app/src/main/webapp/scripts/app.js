@@ -24,20 +24,33 @@ app.config(function($routeProvider, $locationProvider) {
     });
 });
 
-angular.element(document).ready(
-  function() {
-    var $http = angular.injector(['ng']).get('$http');
-    $http.get('config.json').then(
-      function(response) {
-        var config = response.data;
-        app.constant("APP_CONFIG", config);
-        // Add additional services/constants/variables to your app,
-        // and then finally bootstrap it:
-        angular.bootstrap(document, ['angularCordovaApp']);
-      }
-    );
-  }
-);
+var onDeviceReady = function() {
+  var $http = angular.injector(['ng']).get('$http'),
+    $rootScope = angular.injector(['ng']).get('$rootScope');
+  $rootScope = angular.injector(['ng']).get('$rootScope');
+  $rootScope.loading = true;
+  $http.get('config.json')
+    .success(function(data, status, headers, config) {
+      var config = data;
+      app.constant("APP_CONFIG", config);
+      // Add additional services/constants/variables to your app,
+      // and then finally bootstrap it:
+      angular.bootstrap(document, ['angularCordovaApp']);
+      $rootScope.loading = false;
+    })
+    .error(function(data, status, headers, config) {
+      console.error('Server error during reading users');
+      navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
+      $rootScope.loading = false;
+    });
+}
+
+// on dev fire up event directly
+if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+  document.addEventListener("deviceready", onDeviceReady, false);
+} else {
+  onDeviceReady();
+}
 
 app.controller('AppController', function($rootScope, $scope, $location, $route, SettingsService, ConfigService) {
 

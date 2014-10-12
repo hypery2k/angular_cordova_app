@@ -51,9 +51,9 @@ app.controller('UsersController', function($rootScope, $scope, UserService) {
       function(response) {
         $scope.users = response.data;
         $rootScope.loading = false;
-      },function(errorResponse){
-    	console.error('Server error during reading users');
-		navigator.notification.alert('Server did not show valid response.',null,'Server Error');
+      }, function(errorResponse) {
+        console.error('Server error during reading users');
+        navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
         $rootScope.loading = false;
       }
     );
@@ -91,6 +91,7 @@ app.controller('SettingsController', function($rootScope, $scope, $location, $ro
   }
 
   function saveSettings() {
+    $rootScope.loading = true;
     SettingsService.save($scope.settings).then(function() {
       $rootScope.$broadcast('handleConfigUpdate', $scope.settings);
       // redirect
@@ -98,6 +99,11 @@ app.controller('SettingsController', function($rootScope, $scope, $location, $ro
       $route.reload();
       // update config
       ConfigService.configureServices();
+      $rootScope.loading = false;
+    }, function(reason) {
+      console.error('Server error during saving settings');
+      $rootScope.loading = false;
+      navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
     });
   }
 
