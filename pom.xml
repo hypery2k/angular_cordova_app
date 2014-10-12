@@ -15,6 +15,21 @@
         <module>webtest</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>${maven-eclipse-plugin.version}</version>
+                <configuration>
+                    <buildOutputDirectory>build/classes</buildOutputDirectory>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <downloadSources>true</downloadSources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -189,8 +204,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
     <pluginRepositories>
         <pluginRepository>
             <id>sonatype-nexus-snapshots</id>
