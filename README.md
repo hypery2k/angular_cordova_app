@@ -13,5 +13,3 @@ If you like, you're free to donate:
 
 
 [![Build Status](https://martinreinhardt-online.de/jenkins/job/AngularCordovaApp/badge/icon)](https://martinreinhardt-online.de/jenkins/job/AngularCordovaApp/)
-
-mvn -Pdeploy-local-jboss install
