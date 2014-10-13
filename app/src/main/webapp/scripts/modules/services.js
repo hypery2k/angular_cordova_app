@@ -44,6 +44,24 @@ app.service('ChatService', function($rootScope, $log) {
                 })
             }
         }
+
+        socket.onconnecting = function() {
+            var args = arguments;
+            if (service.handlers.connecting) {
+                $rootScope.$apply(function() {
+                    service.handlers.connecting.apply(socket, args)
+                })
+            }
+        }
+
+        socket.onerror = function() {
+            var args = arguments;
+            if (service.handlers.error) {
+                $rootScope.$apply(function() {
+                    service.handlers.error.apply(socket, args)
+                })
+            }
+        }
     }
 
     var service = {
@@ -64,6 +82,12 @@ app.service('ChatService', function($rootScope, $log) {
         },
         connected: function(callback) {
             this.handlers.connected = callback;
+        },
+        connecting: function(callback) {
+            this.handlers.connecting = callback;
+        },
+        error: function(callback) {
+            this.handlers.error = callback;
         }
     };
     return service;

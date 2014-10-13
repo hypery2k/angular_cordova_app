@@ -21,6 +21,11 @@ app.controller('ChatController', function($rootScope, $scope, $routeParams, Sett
     ChatService.connected(function() {
       $rootScope.loading = false;
     });
+    ChatService.error(function() {
+      $rootScope.loading = false;
+      console.error('Server error during reading connectiong to WebSocket');
+      navigator.notification.alert('Server did not respond.', null, 'Messaging Error');
+    });
   }
 
   function sendMessage() {
