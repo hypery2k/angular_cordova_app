@@ -34,13 +34,13 @@ public class SettingsSaveIT {
 
 	@Test
 	@Issues({ "#5" })
-	public void showSettings() {
+	public void shouldSeeSettings() {
 		appSteps.goToSettings();
 	}
 
 	@Test
 	@Issues({ "#5", "#6" })
-	public void userListingWithoutErrors() {
+	public void shouldSeeUserListingAfterSavingSettings() {
 		appSteps.goToSettings();
 		appSteps.saveNewSettings("user1", "user1");
 		appSteps.goToUserListing();
