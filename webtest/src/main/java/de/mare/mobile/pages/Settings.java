@@ -25,12 +25,12 @@ public class Settings extends PageObject {
 
 	public void inputUsername(final String pUsername) {
 		element(usernameInput).waitUntilVisible();
-		element(usernameInput).typeAndEnter(pUsername);
+		element(usernameInput).type(pUsername);
 	}
 
 	public void inputPassword(final String pPassword) {
 		element(passwordInput).waitUntilVisible();
-		element(passwordInput).typeAndEnter(pPassword);
+		element(passwordInput).type(pPassword);
 	}
 
 	public void clickOnSubmit() {

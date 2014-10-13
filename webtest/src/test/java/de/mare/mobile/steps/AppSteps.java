@@ -43,13 +43,37 @@ public class AppSteps extends ScenarioSteps {
 	}
 
 	@Step
-	public void goToSettings() {
+	public void openSideBarLeft() {
+		app().openNavBarIfNeeded();
+	}
+
+	@Step
+	public void waitForSideBarLeftClosing() {
+		app().waitForNavBarClosedIfNeeded();
+	}
+
+	@Step
+	public void clickSettingsMenuItem() {
 		app().clickSettingsItem();
 	}
 
 	@Step
-	public void goToUserListing() {
+	public void clickUserMenuItem() {
 		app().clickUsersItem();
+	}
+
+	@StepGroup
+	public void goToSettings() {
+		openSideBarLeft();
+		clickSettingsMenuItem();
+		waitForSideBarLeftClosing();
+	}
+
+	@StepGroup
+	public void goToUserListing() {
+		openSideBarLeft();
+		clickUserMenuItem();
+		waitForSideBarLeftClosing();
 	}
 
 	@Step
@@ -77,7 +101,8 @@ public class AppSteps extends ScenarioSteps {
 	@Issue("#6")
 	@Step
 	public void should_see_user_listings() {
-		assertThat("Error message should not be visible", !users().isErrorMsgVisible());
+		assertThat("Error message should not be visible", !users()
+				.isErrorMsgVisible());
 	}
 
 	@Issue("#6")

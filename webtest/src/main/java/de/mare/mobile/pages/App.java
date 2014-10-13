@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 public class App extends PageObject {
 
 	@FindBy(id = "navbar")
+	private WebElement navBarButton;
+
+	@FindBy(id = "mainSidebar")
 	private WebElement navBar;
 
 	@FindBy(xpath = "//*[@id='home']/a")
@@ -20,26 +23,37 @@ public class App extends PageObject {
 	private WebElement menuItemSettings;
 
 	public void openNavBarIfNeeded() {
-		if (element(navBar).isVisible()) {
-			element(menuItemHome).click();
+		try {
+			element(navBarButton).click();
+			element(navBar).waitUntilVisible();
+			element(navBar).waitUntilEnabled();
+		} catch (Exception e) {
+		}
+	}
+
+	public void waitForNavBarClosedIfNeeded() {
+		try {
+			element(navBar).waitUntilNotVisible();
+			element(navBar).waitUntilDisabled();
+		} catch (Exception e) {
 		}
 	}
 
 	public void clickHomeItem() {
-		openNavBarIfNeeded();
 		element(menuItemHome).waitUntilVisible();
+		element(menuItemHome).waitUntilEnabled();
 		element(menuItemHome).click();
 	}
 
 	public void clickUsersItem() {
-		openNavBarIfNeeded();
 		element(menuItemUsers).waitUntilVisible();
+		element(menuItemUsers).waitUntilEnabled();
 		element(menuItemUsers).click();
 	}
 
 	public void clickSettingsItem() {
-		openNavBarIfNeeded();
 		element(menuItemSettings).waitUntilVisible();
+		element(menuItemSettings).waitUntilEnabled();
 		element(menuItemSettings).click();
 	}
 

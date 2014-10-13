@@ -23,7 +23,7 @@ import de.mare.mobile.steps.AppSteps;
 @RunWith(ThucydidesRunner.class)
 public class SettingsSaveIT {
 
-	@Managed(uniqueSession = true)
+	@Managed
 	public WebDriver webdriver;
 
 	@ManagedPages
@@ -53,7 +53,7 @@ public class SettingsSaveIT {
 		appSteps.goToSettings();
 		appSteps.saveNewSettings("user1", "user1");
 		appSteps.goToUserListing();
-		appSteps.should_show_correct_user_count(3);
+		appSteps.should_show_correct_user_count(2);
 	}
 
 }
