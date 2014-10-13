@@ -1,4 +1,5 @@
 app.controller('ChatController', function($rootScope, $scope, $routeParams, SettingsService, ChatService) {
+  "use strict";
   var recipient = $routeParams.username,
     settings = SettingsService.load(),
     sender = settings.username,
@@ -43,13 +44,26 @@ app.controller('ChatController', function($rootScope, $scope, $routeParams, Sett
 
 });
 
-app.controller('UsersController', function($rootScope, $scope, UserService) {
+app.controller('UsersController', function($rootScope, $scope, SettingsService, UserService) {
+  "use strict";
+  $scope.settings = SettingsService.load();
 
   function loadUsers() {
     $rootScope.loading = true;
     UserService.listAllUsers().then(
       function(response) {
-        $scope.users = response.data;
+        var allUsers = response.data,
+          users = [];
+        var count = 0;
+        for (var itemIndex in allUsers) {
+          var user = allUsers[itemIndex];
+          // don't show current user in list
+          if (user.username != $scope.settings.username) {
+            $scope.users;
+            users.push(user);
+          }
+        }
+        $scope.users = users;
         $rootScope.loading = false;
       }, function(errorResponse) {
         console.error('Server error during reading users');
@@ -68,6 +82,8 @@ app.controller('UsersController', function($rootScope, $scope, UserService) {
 });
 
 app.controller('NavigationController', function($rootScope, $scope, SettingsService) {
+  "use strict";
+
   function init() {
     $scope.settings = SettingsService.load();
     $scope.$on('handleConfigUpdate', function(event, settings) {
