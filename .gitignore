@@ -40,3 +40,5 @@ webtest/.classpath
 webtest/.project
 
 app/.project
+
+*.pageflow

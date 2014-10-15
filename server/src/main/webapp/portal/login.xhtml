@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/portal/templates/page_template.xhtml">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['pages.login.title']}" />
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="loginForm">
+			<p:panel id="loginPanel" header="#{msg['pages.login.title']}">
+				<p:panelGrid columns="3" cellpadding="5"
+					style="background-color: white">
+
+					<h:outputLabel for="username"
+						value="#{msg['pages.login.label.username']}:" />
+					<p:inputText id="username"
+						label="#{msg['pages.login.label.username']}" required="true"
+						value="#{loginPage.username}" />
+					<p:spacer />
+
+					<h:outputLabel for="password"
+						value="#{msg['pages.login.label.password']}:" />
+					<p:password id="password"
+						label="#{msg['pages.login.label.password']}" required="true"
+						value="#{loginPage.password}" />
+					<p:spacer />
+
+					<p:commandButton id="loginButton" ajax="false"
+						value="#{msg['pages.login.button.login']}"
+						action="#{loginPage.loginAction}" widgetVar="submitButton" />
+					<p:spacer />
+					<p:spacer />
+
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

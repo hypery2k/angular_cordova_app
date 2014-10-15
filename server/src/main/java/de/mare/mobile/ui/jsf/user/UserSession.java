@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: SimpleRS.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: UserSession.java, 14.10.2014, 07:34:17, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,50 +28,60 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.api.rs;
+package de.mare.mobile.ui.jsf.user;
 
-import java.net.UnknownHostException;
+import java.io.Serializable;
 
-import javax.annotation.ManagedBean;
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
-import de.mare.mobile.services.ConfigRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.mare.mobile.domain.User;
 
 /**
- * Sample Info REST service, showing system information
- * 
  * @author mreinhardt
- * 
+ *
  */
-@Path("app")
-@ManagedBean
-public class AppService {
+@Named
+@SessionScoped
+public class UserSession implements Serializable {
 
-	@Inject
-	private ConfigRepository configRepository;
+	/**
+	 * Serial ID
+	 */
+	private static final long serialVersionUID = -2958079855268594477L;
 
-	@Path("memory")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response freeMem() {
-		final long memory = Runtime.getRuntime().freeMemory();
-		final Response.ResponseBuilder response = Response.status(
-				Response.Status.OK).entity(memory);
-		return response.build();
+	/**
+	 * Logger
+	 */
+	private Logger LOG = LoggerFactory.getLogger(UserSession.class);
+
+	/**
+	 * currently selected user
+	 */
+	private User user;
+
+	@PostConstruct
+	public void init() {
+		LOG.info("Init of user session complete");
 	}
 
-	@Path("config")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAppConfig() throws UnknownHostException {
-		Response.ResponseBuilder response = null;
-		String config = configRepository.getAppConfig().getValue();
-		response = Response.status(Response.Status.OK).entity(config);
-		return response.build();
+	/**
+	 * @param pUser
+	 *            the user to set
+	 */
+	public void setUser(final User pUser) {
+		this.user = pUser;
 	}
+
+	/**
+	 * @return the current user
+	 */
+	public User getUser() {
+		return this.user;
+	}
+
 }

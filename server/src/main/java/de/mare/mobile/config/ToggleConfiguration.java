@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: SimpleRS.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: ToggleConfiguration.java, 14.10.2014, 06:53:30, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,50 +28,51 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.api.rs;
+package de.mare.mobile.config;
 
-import java.net.UnknownHostException;
+import javax.annotation.Resource;
+import javax.enterprise.context.ApplicationScoped;
+import javax.sql.DataSource;
 
-import javax.annotation.ManagedBean;
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import de.mare.mobile.services.ConfigRepository;
+import org.togglz.core.Feature;
+import org.togglz.core.manager.TogglzConfig;
+import org.togglz.core.repository.StateRepository;
+import org.togglz.core.repository.jdbc.JDBCStateRepository;
+import org.togglz.core.user.UserProvider;
+import org.togglz.servlet.user.ServletUserProvider;
 
 /**
- * Sample Info REST service, showing system information
- * 
  * @author mreinhardt
- * 
+ *
  */
-@Path("app")
-@ManagedBean
-public class AppService {
+@ApplicationScoped
+public class ToggleConfiguration  implements TogglzConfig {
+	
+    @Resource(mappedName = "java:/jdbc/ChatDS")
+    private DataSource dataSource;
 
-	@Inject
-	private ConfigRepository configRepository;
-
-	@Path("memory")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response freeMem() {
-		final long memory = Runtime.getRuntime().freeMemory();
-		final Response.ResponseBuilder response = Response.status(
-				Response.Status.OK).entity(memory);
-		return response.build();
+	/**
+	 * @see org.togglz.core.manager.TogglzConfig#getFeatureClass()
+	 */
+	@Override
+	public Class<? extends Feature> getFeatureClass() {
+		return AppFeatures.class;
 	}
 
-	@Path("config")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAppConfig() throws UnknownHostException {
-		Response.ResponseBuilder response = null;
-		String config = configRepository.getAppConfig().getValue();
-		response = Response.status(Response.Status.OK).entity(config);
-		return response.build();
+	/**
+	 * @see org.togglz.core.manager.TogglzConfig#getStateRepository()
+	 */
+	@Override
+	public StateRepository getStateRepository() {
+        return new JDBCStateRepository(dataSource);
 	}
+
+	/**
+	 * @see org.togglz.core.manager.TogglzConfig#getUserProvider()
+	 */
+	@Override
+	public UserProvider getUserProvider() {
+        return new ServletUserProvider("admin");
+	}
+
 }

@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: AppConstants.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: WebUIConstants.java, 13.10.2014, 17:59:44, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,22 +28,42 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.utils;
-
-import javax.annotation.security.DeclareRoles;
+package de.mare.mobile.ui.util;
 
 /**
+ * Contains constants for the web app. Used by application classes and should be
+ * used in the JSF config and JSF views.
+ * 
  * @author mreinhardt
- *
+ * 
  */
-@DeclareRoles({ "user" })
-public class AppConstants {
+public final class WebUIConstants {
 
-	public final static String PU_NAME = "chatPU";
+	private WebUIConstants() {
+	}
 
-	// key to app config 
-	public final static String APP_CFGPARAM = "appConfig";
-	// default config
-	public final static String APP_CFG_DEFAULT = "{\"rsBackend\":\"http://localhost:8080/cordova-server-backend/api\",\"wsBackend\":\"ws://localhost:8080/cordova-server-backend/message\"}";
+	// UI CONSTANTS
+
+	public static final String EMPTY_TIMESTAMP = "00:00";
+
+	public static final String USER_LOGIN_CONTEXT = "cv-login";
+
+	public static final String SESSION_ATTRIBUTE_ERRORCODE = "errorID";
+
+	// pages
+
+	public static final String PAGES_URL_LOGIN = "/login.xhtml";
+
+	public static final String PAGES_PORTAL_START = "/portal/start.xhtml";
+
+	public static final String PAGES_ERROR = "/error.xhtml";
+
+	// JSF navigation case
+
+	public static final String NAV_OUTCOME_LOGIN = "login";
+
+	public static final String NAV_OUTCOME_LOGIN_ERROR = "login.error";
+
+	public static final String NAV_OUTCOME_LOGOUT = "logout";
 
 }

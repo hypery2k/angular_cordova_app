@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+              http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"> 
+  
+  <application>
+    <resource-bundle>
+      <base-name>Messages</base-name>
+      <var>msg</var>
+    </resource-bundle>
+    <resource-bundle>
+      <base-name>version</base-name>
+      <var>ver</var>
+    </resource-bundle>
+    <message-bundle>Messages</message-bundle>
+    <locale-config>
+      <default-locale>de</default-locale>
+      <supported-locale>de</supported-locale>
+      <supported-locale>en</supported-locale>
+    </locale-config>
+  </application>
+  
+ <!-- we handle errors ourselves -->
+  <factory>
+        <exception-handler-factory>
+           de.mare.mobile.ui.jsf.CustomExceptionHandlerFactory
+        </exception-handler-factory>
+  </factory>
+
+  <!-- Global navigation rules -->
+  <navigation-rule>
+    <from-view-id>*</from-view-id>
+    <navigation-case>
+      <from-outcome>portal.start</from-outcome>
+      <to-view-id>/portal/start.xhtml</to-view-id>
+      <redirect />
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>login</from-outcome>
+      <to-view-id>/portal/login.xhtml</to-view-id>
+      <redirect />
+    </navigation-case> 
+    <navigation-case>
+      <from-outcome>logout</from-outcome>
+      <to-view-id>/portal/login.xhtml</to-view-id>
+      <redirect />
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>error</from-outcome>
+      <to-view-id>/portal/error.xhtml</to-view-id>
+      <redirect />
+    </navigation-case>
+  </navigation-rule>
+    
+  <!-- Navigation rules for login -->
+  <navigation-rule>
+    <from-view-id>/login.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>login</from-outcome>
+      <to-view-id>/portal/login.xhtml</to-view-id>
+      <redirect />
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>login.error</from-outcome>
+      <to-view-id>/portal/login.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+</faces-config>

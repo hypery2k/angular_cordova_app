@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html" locale="de">
+
+	<h:head>
+		<link
+			href="#{request.contextPath}/portal/static/css/core.css?id=#{systemData.startUpTime.time}"
+			rel="stylesheet" type="text/css" />
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title><ui:insert name="title"></ui:insert></title>
+		</f:facet>
+	</h:head>
+
+	<h:body>
+
+		<ui:insert name="body" />
+
+		<ui:remove>
+			<!-- Activate debug mode -->
+		</ui:remove>
+
+		<ui:fragment rendered="#{systemData.debugEnabled} ne null}">
+			<ui:debug hotkey="f" />
+			<p:log />
+		</ui:fragment>
+
+		<div id="bottombar" class="align-center"></div>
+
+		<ui:remove>
+			<!--  Common Javascript libs-->
+		</ui:remove>
+		<script language="JavaScript" type="text/javascript"
+			src="#{request.contextPath}/portal/static/js/core.js?id=#{systemData.startUpTime.time}">
+			
+		</script><ui:remove>
+			<!--  Additional Javascript libs-->
+		</ui:remove>
+		<ui:insert name="libs-js" />
+
+		<ui:remove>
+			<!-- own JS functions -->
+		</ui:remove>
+
+		<ui:remove>
+			<!--  Additional page dependent Javascript functions -->
+		</ui:remove>
+		<script language="JavaScript" type="text/javascript">
+			<ui:insert name="more-js" />
+		</script>
+	</h:body>
+</f:view>
+</html>

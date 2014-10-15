@@ -36,6 +36,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,12 +63,18 @@ import de.mare.mobile.domain.validation.ValidatorFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
+@NamedQueries({ @NamedQuery(name = User.NAMED_QUERY_FIND_BY_USERNAME, query = "select u from User u where u.username = :"
+		+ User.NAMED_QUERY_FIND_BY_USERNAME_PARAM_USERNAME) })
 public class User implements Serializable {
 
 	/**
 	 * Serial ID
 	 */
 	private static final long serialVersionUID = -8879332249157192528L;
+
+	public static final String NAMED_QUERY_FIND_BY_USERNAME = "User.findByUsername";
+
+	public static final String NAMED_QUERY_FIND_BY_USERNAME_PARAM_USERNAME = "userid";
 
 	@Id
 	@GeneratedValue
@@ -128,7 +136,7 @@ public class User implements Serializable {
 
 	/**
 	 * @param username
-	 *          the username to set
+	 *            the username to set
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -143,7 +151,7 @@ public class User implements Serializable {
 
 	/**
 	 * @param firstname
-	 *          the firstname to set
+	 *            the firstname to set
 	 */
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
@@ -158,7 +166,7 @@ public class User implements Serializable {
 
 	/**
 	 * @param lastname
-	 *          the lastname to set
+	 *            the lastname to set
 	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
@@ -173,7 +181,7 @@ public class User implements Serializable {
 
 	/**
 	 * @param password
-	 *          the password to set
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -188,7 +196,7 @@ public class User implements Serializable {
 
 	/**
 	 * @param pSecurityRole
-	 *          the securityRole to set
+	 *            the securityRole to set
 	 */
 	public final void setRole(final SecurityRole pSecurityRole) {
 		if (pSecurityRole != null) {
@@ -274,7 +282,8 @@ public class User implements Serializable {
 
 		public User build() {
 			User newUser = new User(this);
-			ValidationConditions.isValid(newUser, ValidatorFactory.getValidator());
+			ValidationConditions.isValid(newUser,
+					ValidatorFactory.getValidator());
 			return newUser;
 		}
 	}

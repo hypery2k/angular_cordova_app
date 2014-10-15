@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: SimpleRS.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: CustomExceptionHandlerFactory.java, 13.10.2014, 17:57:40, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,50 +28,33 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.api.rs;
+package de.mare.mobile.ui.jsf;
 
-import java.net.UnknownHostException;
-
-import javax.annotation.ManagedBean;
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import de.mare.mobile.services.ConfigRepository;
+import javax.faces.context.ExceptionHandler;
+import javax.faces.context.ExceptionHandlerFactory;
 
 /**
- * Sample Info REST service, showing system information
+ * Factory to handle the errors for ourself, see
+ * https://cwiki.apache.org/confluence/display/MYFACES/Handling+Server+Errors
  * 
  * @author mreinhardt
  * 
  */
-@Path("app")
-@ManagedBean
-public class AppService {
+public class CustomExceptionHandlerFactory extends ExceptionHandlerFactory {
 
-	@Inject
-	private ConfigRepository configRepository;
+	private final ExceptionHandlerFactory parent;
 
-	@Path("memory")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response freeMem() {
-		final long memory = Runtime.getRuntime().freeMemory();
-		final Response.ResponseBuilder response = Response.status(
-				Response.Status.OK).entity(memory);
-		return response.build();
+	// this injection handles jsf
+	public CustomExceptionHandlerFactory(final ExceptionHandlerFactory parent) {
+		this.parent = parent;
 	}
 
-	@Path("config")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAppConfig() throws UnknownHostException {
-		Response.ResponseBuilder response = null;
-		String config = configRepository.getAppConfig().getValue();
-		response = Response.status(Response.Status.OK).entity(config);
-		return response.build();
+	@Override
+	public ExceptionHandler getExceptionHandler() {
+
+		final ExceptionHandler handler = new ErrorHandler(
+				this.parent.getExceptionHandler());
+
+		return handler;
 	}
 }

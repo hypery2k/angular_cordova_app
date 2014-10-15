@@ -6,6 +6,7 @@ import javax.annotation.security.PermitAll;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -24,6 +25,9 @@ import de.mare.mobile.domain.User;
 @PermitAll
 public class UserRepository {
 
+	/**
+	 * Logger
+	 */
 	private Logger LOG = LoggerFactory.getLogger(UserRepository.class);
 
 	@Inject
@@ -37,6 +41,25 @@ public class UserRepository {
 	public User addUser(final User pUserToSave) {
 		entityManager.persist(pUserToSave);
 		return pUserToSave;
+	}
+
+	/**
+	 * 
+	 * @param pUsername
+	 * @return
+	 */
+	public User findUser(final String pUsername) {
+		final TypedQuery<User> query = entityManager.createNamedQuery(
+				User.NAMED_QUERY_FIND_BY_USERNAME, User.class);
+		query.setParameter(User.NAMED_QUERY_FIND_BY_USERNAME_PARAM_USERNAME,
+				pUsername);
+		User user = null;
+		try {
+			user = query.getSingleResult();
+		} catch (final Exception e) {
+			LOG.error("error during search for user.", e);
+		}
+		return user;
 	}
 
 	/**

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="page_template.xhtml">
+
+	<ui:define name="body">
+
+		<h:form id="topbar-form">
+			<ui:include src="includes/inc.main-topbar.xhtml" />
+		</h:form>
+
+		<p:blockUI block="content-form" widgetVar="blockUI" />
+
+		<h:form id="content-form">
+
+			<h:panelGroup layout="block" id="dialogs">
+
+				<ui:remove>
+					<!-- Dialogs should be placed here -->
+				</ui:remove>
+
+				<ui:insert name="dialogs" />
+			</h:panelGroup>
+
+			<ui:remove>
+				<!-- Indicate loading actions -->
+			</ui:remove>
+			<div id="statusloader" />
+
+			<ui:remove>
+				<!-- Used to execute actions before and after AJAX calls -->
+			</ui:remove>
+			<p:ajaxStatus widgetVar="statusloaderWidget" />
+			<ui:remove>
+				<!--TOP BAR-->
+			</ui:remove>
+
+			<ui:remove>
+				<!--HEADER-->
+			</ui:remove>
+			<ui:include src="includes/inc.content-header.xhtml" />
+			<div id="main-content-container">
+
+				<ui:insert name="navigation"></ui:insert>
+
+				<div class="content" style="background-color: white; width: 100%">
+					<ui:remove>
+						<!-- Main Content goes here -->
+					</ui:remove>
+					<ui:insert name="content" />
+				</div>
+
+			</div>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</html>

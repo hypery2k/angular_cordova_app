@@ -33,6 +33,7 @@ package de.mare.mobile.api.rs;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.ManagedBean;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -53,6 +54,7 @@ import de.mare.mobile.services.UserRepository;
  * 
  */
 @Path("user")
+@ManagedBean
 public class UserService {
 
 	@Inject

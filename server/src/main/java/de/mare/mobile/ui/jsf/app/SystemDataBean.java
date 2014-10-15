@@ -1,7 +1,7 @@
 /**
  * Cordova Angular JE22 Demo App
  *
- * File: SimpleRS.java, 18.07.2014, 12:49:55, mreinhardt
+ * File: SystemDataBean.java, 13.10.2014, 20:41:00, mreinhardt
  *
  * https://www.martinreinhardt-online.de/apps
  *
@@ -28,50 +28,58 @@
  * SOFTWARE.
  *
  */
-package de.mare.mobile.api.rs;
+package de.mare.mobile.ui.jsf.app;
 
-import java.net.UnknownHostException;
+import java.io.Serializable;
+import java.util.Date;
 
-import javax.annotation.ManagedBean;
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 
-import de.mare.mobile.services.ConfigRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Sample Info REST service, showing system information
+ * Provides SelectItems for user selection. Should only used in request scope.
+ * (items are localised to the user selected language)
  * 
  * @author mreinhardt
  * 
  */
-@Path("app")
-@ManagedBean
-public class AppService {
+@ManagedBean(name = "systemData")
+@ApplicationScoped
+public class SystemDataBean implements Serializable {
 
-	@Inject
-	private ConfigRepository configRepository;
+	/**
+	 * Serial ID
+	 */
+	private static final long serialVersionUID = -5959402672521985879L;
 
-	@Path("memory")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response freeMem() {
-		final long memory = Runtime.getRuntime().freeMemory();
-		final Response.ResponseBuilder response = Response.status(
-				Response.Status.OK).entity(memory);
-		return response.build();
+	/**
+	 * Logger
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(SystemDataBean.class);
+
+	private Date startUpTime;
+
+	@PostConstruct
+	public void init() {
+		LOG.info("Application startup complete");
+		this.startUpTime = new Date();
 	}
 
-	@Path("config")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAppConfig() throws UnknownHostException {
-		Response.ResponseBuilder response = null;
-		String config = configRepository.getAppConfig().getValue();
-		response = Response.status(Response.Status.OK).entity(config);
-		return response.build();
+	/**
+	 * @return the startUpTime
+	 */
+	public Date getStartUpTime() {
+		return startUpTime;
+	}
+
+	/**
+	 * @return true if the debug mode is enabled
+	 */
+	public boolean isDebugEnabled() {
+		return false;
 	}
 }
