@@ -170,4 +170,62 @@ public class AuthFilter implements Filter {
       response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
   }
+
+  // GETTER & SETTER
+
+  /**
+   * @return the loginPage
+   */
+  public String getLoginPage() {
+    return loginPage;
+  }
+
+  /**
+   * @param loginPage the loginPage to set
+   */
+  public void setLoginPage(String loginPage) {
+    this.loginPage = loginPage;
+  }
+
+  /**
+   * @return the redirectToLoginPage
+   */
+  public boolean isRedirectToLoginPage() {
+    return redirectToLoginPage;
+  }
+
+  /**
+   * @param redirectToLoginPage the redirectToLoginPage to set
+   */
+  public void setRedirectToLoginPage(boolean redirectToLoginPage) {
+    this.redirectToLoginPage = redirectToLoginPage;
+  }
+
+  /**
+   * @return the excludeURIs
+   */
+  public String[] getExcludeURIs() {
+    return excludeURIs;
+  }
+
+  /**
+   * @param excludeURIs the excludeURIs to set
+   */
+  public void setExcludeURIs(String[] excludeURIs) {
+    this.excludeURIs = excludeURIs;
+  }
+
+  /**
+   * @return the userSession
+   */
+  public UserSession getUserSession() {
+    return userSession;
+  }
+
+  /**
+   * @param userSession the userSession to set
+   */
+  public void setUserSession(UserSession userSession) {
+    this.userSession = userSession;
+  }
 }

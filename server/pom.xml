@@ -166,6 +166,16 @@
 			<artifactId>togglz-console</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-testing</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<scope>test</scope>
