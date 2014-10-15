@@ -6,39 +6,31 @@
 #
 # Pods/
 
-platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/xcuserdata/mreinhardt.xcuserdatad/*.xcuserstate
-server/.project
-server/.settings/org.eclipse.jdt.core.prefs
-server/.classpath
-
+.idea/workspace.xml
+app/.classpath
+app/.project
 app/target/*
 app/platforms/ios/angularCordovaApp.xcodeproj/xcuserdata/*
 app/platforms/ios/angularCordovaApp.xcodeproj/project.xcworkspace/*
 app/platforms/ios/www/*
-
-.idea/workspace.xml
 app/node_modules/*
 app/bower_components/*
 app/node/*
 app/.classpath
 app/www/*
 app/.tmp*
-node_modules/.bin/grunt*
 
-app/.classpath
-app/.project
-**/.settings/*
-
+server/.project
+server/.settings/org.eclipse.jdt.core.prefs
+server/.classpath
 server/mem.h2.db
 server/logs/*
-target/*
 
 webtest/target/*
-
 webtest/.classpath
-
 webtest/.project
 
-app/.project
-
+**/.settings/*
 *.pageflow
+.project
+target/*
