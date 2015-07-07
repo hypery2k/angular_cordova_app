@@ -410,13 +410,4 @@
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
     </socket-binding-group>
-
-    <deployments>
-        <deployment name="cordova-server-backend.war" runtime-name="cordova-server-backend.war">
-            <content sha1="f33ec96d7d7d7523fddeb95de2ef8afef818ebeb"/>
-        </deployment>
-        <deployment name="cordova-app.war" runtime-name="cordova-app.war">
-            <content sha1="9c2741f0c2178d6c6b8d26dc6bcd6284b97524cd"/>
-        </deployment>
-    </deployments>
 </server>
