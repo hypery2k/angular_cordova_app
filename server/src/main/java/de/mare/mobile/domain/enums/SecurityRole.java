@@ -15,10 +15,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,12 +32,13 @@ package de.mare.mobile.domain.enums;
 
 /**
  * Type of security role for a User
- * 
+ *
  * @author mreinhardt
  */
 public enum SecurityRole {
 
 	// @formatter:off
+	ADMIN(0, false, "security.role.admin", "admin"), // admin user
 	ANONYMOUS(1, true, "security.role.anonymous", "anonymous"), // anonym user
 	USER(2, false, "security.role.user", "user"), // end user
 	;
@@ -60,7 +61,7 @@ public enum SecurityRole {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return id of security role
 	 */
 	public int getId() {
@@ -68,7 +69,7 @@ public enum SecurityRole {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return resourceKey, used for translation
 	 */
 	public String getResourceKey() {
@@ -76,7 +77,7 @@ public enum SecurityRole {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the name of the status
 	 */
 	public String getName() {
@@ -92,7 +93,7 @@ public enum SecurityRole {
 
 	/**
 	 * Get the Security Role via id
-	 * 
+	 *
 	 * @param pID
 	 *          desired id
 	 * @return security role
@@ -108,7 +109,7 @@ public enum SecurityRole {
 
 	/**
 	 * Get the Security Role via name
-	 * 
+	 *
 	 * @param pName
 	 *          desired name
 	 * @return security role
