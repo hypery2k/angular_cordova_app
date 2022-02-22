@@ -46,7 +46,7 @@
 		<slf4j.version>1.7.7</slf4j.version>
 		<jersey.version>2.5</jersey.version>
 		<h2database.version>1.3.170</h2database.version>
-		<togglz.version>2.0.1.Final</togglz.version>
+		<togglz.version>2.9.9</togglz.version>
 		<jsf.version>2.0</jsf.version>
 		<primefaces.version>5.1</primefaces.version>
 		<primefaces-theme.version>1.0.10</primefaces-theme.version>
